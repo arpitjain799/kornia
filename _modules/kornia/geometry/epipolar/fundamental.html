@@ -380,7 +380,6 @@
 <div class="viewcode-block" id="find_fundamental"><a class="viewcode-back" href="../../../../geometry.epipolar.html#kornia.geometry.epipolar.find_fundamental">[docs]</a><span class="k">def</span> <span class="nf">find_fundamental</span><span class="p">(</span>
     <span class="n">points1</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">points2</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">weights</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
-
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute the fundamental matrix using the DLT formulation.</span>
 
 <span class="sd">    The linear system is solved by using the Weighted Least Squares Solution for the 8 Points algorithm.</span>
