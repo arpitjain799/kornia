@@ -310,8 +310,10 @@
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
 
+<span class="kn">from</span> <span class="nn">kornia.core</span> <span class="kn">import</span> <span class="n">Tensor</span>
+<span class="kn">from</span> <span class="nn">kornia.core.check</span> <span class="kn">import</span> <span class="n">KORNIA_CHECK_DM_DESC</span><span class="p">,</span> <span class="n">KORNIA_CHECK_SHAPE</span>
 <span class="kn">from</span> <span class="nn">kornia.feature.laf</span> <span class="kn">import</span> <span class="n">get_laf_center</span>
-<span class="kn">from</span> <span class="nn">kornia.testing</span> <span class="kn">import</span> <span class="n">KORNIA_CHECK_DM_DESC</span><span class="p">,</span> <span class="n">KORNIA_CHECK_SHAPE</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">is_mps_tensor_safe</span>
+<span class="kn">from</span> <span class="nn">kornia.testing</span> <span class="kn">import</span> <span class="n">is_mps_tensor_safe</span>
 
 <span class="kn">from</span> <span class="nn">.adalam</span> <span class="kn">import</span> <span class="n">get_adalam_default_config</span><span class="p">,</span> <span class="n">match_adalam</span>
 
