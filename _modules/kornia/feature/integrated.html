@@ -389,17 +389,10 @@
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
-            <span class="o">+</span> <span class="s1">&#39;(&#39;</span>
-            <span class="o">+</span> <span class="s1">&#39;descriptor=&#39;</span>
-            <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
-            <span class="o">+</span> <span class="s1">&#39;, &#39;</span>
-            <span class="o">+</span> <span class="s1">&#39;patch_size=&#39;</span>
-            <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">patch_size</span><span class="p">)</span>
-            <span class="o">+</span> <span class="s1">&#39;, &#39;</span>
-            <span class="o">+</span> <span class="s1">&#39;grayscale_descriptor=&#39;</span>
-            <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grayscale_descriptor</span><span class="p">)</span>
-            <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;(descriptor=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span><span class="si">}</span><span class="s2">, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;patch_size=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">patch_size</span><span class="si">}</span><span class="s2">, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;grayscale_descriptor=&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">grayscale_descriptor</span><span class="si">}</span><span class="s2">)&quot;</span>
         <span class="p">)</span>
 
 <div class="viewcode-block" id="LAFDescriptor.forward"><a class="viewcode-back" href="../../../feature.html#kornia.feature.LAFDescriptor.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">lafs</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
