@@ -331,8 +331,8 @@
 <span class="sd">    Args:</span>
 <span class="sd">        *args: a list of kornia augmentation modules.</span>
 
-<span class="sd">        data_keys: the input type sequential for applying augmentations. Accepts &quot;input&quot;, &quot;mask&quot;, &quot;bbox&quot;, &quot;bbox_xyxy&quot;,</span>
-<span class="sd">                   &quot;bbox_xywh&quot;, &quot;keypoints&quot;.</span>
+<span class="sd">        data_keys: the input type sequential for applying augmentations. Accepts &quot;input&quot;, &quot;image&quot;, &quot;mask&quot;,</span>
+<span class="sd">                   &quot;bbox&quot;, &quot;bbox_xyxy&quot;, &quot;bbox_xywh&quot;, &quot;keypoints&quot;.</span>
 
 <span class="sd">        same_on_batch: apply the same transformation across the batch. If None, it will not overwrite the function-wise</span>
 <span class="sd">                       settings.</span>
@@ -359,7 +359,7 @@
 <span class="sd">                    strategies.</span>
 
 <span class="sd">    .. note::</span>
-<span class="sd">        Mix augmentations (e.g. RandomMixUp, RandomCutMix) can only be working with &quot;input&quot; data key.</span>
+<span class="sd">        Mix augmentations (e.g. RandomMixUp, RandomCutMix) can only be working with &quot;input&quot;/&quot;image&quot; data key.</span>
 <span class="sd">        It is not clear how to deal with the conversions of masks, bounding boxes and keypoints.</span>
 
 <span class="sd">    .. note::</span>
