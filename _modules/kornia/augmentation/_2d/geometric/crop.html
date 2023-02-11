@@ -463,7 +463,7 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Keypoints</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Process keypoints corresponding to the inputs that are no transformation applied.&quot;&quot;&quot;</span>
         <span class="c1"># For pad the keypoints properly.</span>
-        <span class="n">padding_size</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;padding_size&quot;</span><span class="p">]</span>
+        <span class="n">padding_size</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;padding_size&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="nb">input</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
         <span class="nb">input</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">padding_size</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">apply_transform_keypoint</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="nb">input</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">flags</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
 
@@ -593,7 +593,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;batch_prob&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
             <span class="k">return</span> <span class="n">output</span>
 
-        <span class="k">return</span> <span class="n">output</span><span class="o">.</span><span class="n">unpad</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;padding_size&quot;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">output</span><span class="o">.</span><span class="n">unpad</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;padding_size&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="nb">input</span><span class="o">.</span><span class="n">device</span><span class="p">))</span>
 
     <span class="c1"># Override parameters for precrop</span>
     <span class="k">def</span> <span class="nf">forward_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_shape</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">]:</span>
