@@ -1023,7 +1023,7 @@
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; x = torch.rand(1, 6, 3, 3)</span>
 <span class="sd">        &gt;&gt;&gt; out = posterize(x, bits=8)</span>
-<span class="sd">        &gt;&gt;&gt; torch.testing.assert_allclose(x, out)</span>
+<span class="sd">        &gt;&gt;&gt; torch.testing.assert_close(x, out)</span>
 
 <span class="sd">        &gt;&gt;&gt; x = torch.rand(2, 6, 3, 3)</span>
 <span class="sd">        &gt;&gt;&gt; bits = torch.tensor([4, 2])</span>
