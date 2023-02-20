@@ -392,9 +392,19 @@ class Boxes:
 
     def compute_area(self) -> torch.Tensor:
         """Returns :math:`(B, N)`."""
-        w = self._data[:, :, 1, 0] - self._data[:, :, 0, 0]
-        h = self._data[:, :, 2, 1] - self._data[:, :, 0, 1]
+        w = self._data[..., 1, 0] - self._data[..., 0, 0]
+        h = self._data[..., 2, 1] - self._data[..., 0, 1]
         return w * h
+
+    def area(self) -> torch.Tensor:
+        """Returns :math:`(B, N)`."""
+        return self.compute_area()
+
+    def top_left(self) -> torch.Tensor:
+        return self._data[..., 0, :]
+
+    def bottom_right(self) -> torch.Tensor:
+        return self._data[..., 3, :]
 
     @classmethod
     def from_tensor(
