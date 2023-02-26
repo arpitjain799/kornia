@@ -321,7 +321,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>input</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a>) – the input tensor with the logits to evaluate.</p></li>
 <li><p><strong>target</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a>) – the tensor containing the ground truth.</p></li>
-<li><p><strong>topk</strong> (<em>optional</em>) – the expected topk ranking.
+<li><p><strong>topk</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#Ellipsis" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">...</span></code></a>], <em>optional</em>) – the expected topk ranking.
 Default:  <code class="code docutils literal notranslate"><span class="pre">(1,)</span></code></p></li>
 </ul>
 </dd>
@@ -742,8 +742,8 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">'sam
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stats</span> <span class="o">=</span> <span class="n">AverageMeter</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">acc1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">0.99</span><span class="p">)</span> <span class="c1"># coming from K.metrics.accuracy</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">stats</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">acc1</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># where n is batch size usually</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">stats</span><span class="o">.</span><span class="n">avg</span>
-<span class="go">tensor(0.9900)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">avg</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">0.99</span>
 </pre></div>
 </div>
 </dd></dl>

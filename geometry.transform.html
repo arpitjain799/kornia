@@ -990,10 +990,10 @@ resolution as the input image with shape <span class="math notranslate nohighlig
 it is expected to be in x-y.</p></li>
 <li><p><strong>kernel_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>], <em>optional</em>) – the size of the Gaussian kernel.
 Default:  <code class="code docutils literal notranslate"><span class="pre">(63,</span> <span class="pre">63)</span></code></p></li>
-<li><p><strong>sigma</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <em>optional</em>) – The standard deviation of the Gaussian in the y and x directions,
+<li><p><strong>sigma</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a>], <em>optional</em>) – The standard deviation of the Gaussian in the y and x directions,
 respectively. Larger sigma results in smaller pixel displacements.
 Default:  <code class="code docutils literal notranslate"><span class="pre">(32.0,</span> <span class="pre">32.0)</span></code></p></li>
-<li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <em>optional</em>) – The scaling factor that controls the intensity of the deformation
+<li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a>], <em>optional</em>) – The scaling factor that controls the intensity of the deformation
 in the y and x directions, respectively.
 Default:  <code class="code docutils literal notranslate"><span class="pre">(1.0,</span> <span class="pre">1.0)</span></code></p></li>
 <li><p><strong>align_corners</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <em>optional</em>) – Interpolation flag used by <code class="docutils literal notranslate"><span class="pre">`grid_sample`</span></code>.
@@ -1004,13 +1004,11 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">'bil
 Default:  <code class="code docutils literal notranslate"><span class="pre">'zeros'</span></code></p></li>
 </ul>
 </dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a></p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a></p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>the elastically transformed input image with shape <span class="math notranslate nohighlight">\((B,C,H,W)\)</span>.</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the elastically transformed input image with shape <span class="math notranslate nohighlight">\((B,C,H,W)\)</span>.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -1433,8 +1431,11 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">None
 Default:  <code class="code docutils literal notranslate"><span class="pre">None</span></code></p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>params to be passed to the affine transformation with shape <span class="math notranslate nohighlight">\((B, 3, 3)\)</span>.</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tensor</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>params to be passed to the affine transformation with shape <span class="math notranslate nohighlight">\((B, 3, 3)\)</span>.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -1489,8 +1490,11 @@ szy: shearing degree along z axis, towards y plane.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>params to be passed to the affine transformation.</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>params to be passed to the affine transformation.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -2359,6 +2363,26 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">Fals
 <h2>Image registration<a class="headerlink" href="#image-registration" title="Permalink to this heading">#</a></h2>
 <a class="reference internal image-reference" href="_images/registration.gif"><img alt="Image registration with ImageRegistrator module" src="_images/registration.gif" style="width: 400px;" /></a>
 <span class="target" id="module-kornia.geometry.transform.image_registrator"></span><dl class="py class">
+<dt class="sig sig-object py" id="kornia.geometry.transform.image_registrator.BaseModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.geometry.transform.image_registrator.</span></span><span class="sig-name descname"><span class="pre">BaseModel</span></span><a class="reference internal" href="_modules/kornia/geometry/transform/image_registrator.html#BaseModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.geometry.transform.image_registrator.BaseModel" title="Permalink to this definition">#</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="kornia.geometry.transform.image_registrator.BaseModel.forward">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/geometry/transform/image_registrator.html#BaseModel.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.geometry.transform.image_registrator.BaseModel.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.
+:rtype: <a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="kornia.geometry.transform.image_registrator.Homography">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.geometry.transform.image_registrator.</span></span><span class="sig-name descname"><span class="pre">Homography</span></span><a class="reference internal" href="_modules/kornia/geometry/transform/image_registrator.html#Homography"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.geometry.transform.image_registrator.Homography" title="Permalink to this definition">#</a></dt>
 <dd><p>Homography geometric model to be used together with ImageRegistrator module for the optimization-based
@@ -2406,9 +2430,9 @@ image registration.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>model_type</strong> (<em>optional</em>) – Geometrical model for registration. Can be string or Module.
+<li><p><strong>model_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference internal" href="#kornia.geometry.transform.image_registrator.BaseModel" title="kornia.geometry.transform.image_registrator.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></a>], <em>optional</em>) – Geometrical model for registration. Can be string or Module.
 Default:  <code class="code docutils literal notranslate"><span class="pre">'homography'</span></code></p></li>
-<li><p><strong>optimizer</strong> (<em>optional</em>) – optimizer class used for the optimization.
+<li><p><strong>optimizer</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference external" href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" title="(in PyTorch v1.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Optimizer</span></code></a>], <em>optional</em>) – optimizer class used for the optimization.
 Default:  <code class="code docutils literal notranslate"><span class="pre">optim.Adam</span></code></p></li>
 <li><p><strong>loss_fn</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/constants.html#Ellipsis" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">...</span></code></a>, <a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a>], <em>optional</em>) – torch loss function.
 Default:  <code class="code docutils literal notranslate"><span class="pre">F.l1_loss</span></code></p></li>
@@ -2420,7 +2444,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">0.00
 Default:  <code class="code docutils literal notranslate"><span class="pre">100</span></code></p></li>
 <li><p><strong>tolerance</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <em>optional</em>) – stop optimizing if loss difference is less. default 1e-4.
 Default:  <code class="code docutils literal notranslate"><span class="pre">0.0001</span></code></p></li>
-<li><p><strong>warper</strong> (<em>optional</em>) – if model_type is not string, one needs to provide warper object.
+<li><p><strong>warper</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">BaseWarper</span></code>]], <em>optional</em>) – if model_type is not string, one needs to provide warper object.
 Default:  <code class="code docutils literal notranslate"><span class="pre">None</span></code></p></li>
 </ul>
 </dd>
@@ -2693,6 +2717,10 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">True
 </ul>
 </li>
 <li><a class="reference internal" href="#image-registration">Image registration</a><ul>
+<li><a class="reference internal" href="#kornia.geometry.transform.image_registrator.BaseModel"><code class="docutils literal notranslate"><span class="pre">BaseModel</span></code></a><ul>
+<li><a class="reference internal" href="#kornia.geometry.transform.image_registrator.BaseModel.forward"><code class="docutils literal notranslate"><span class="pre">BaseModel.forward()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#kornia.geometry.transform.image_registrator.Homography"><code class="docutils literal notranslate"><span class="pre">Homography</span></code></a><ul>
 <li><a class="reference internal" href="#kornia.geometry.transform.image_registrator.Homography.forward"><code class="docutils literal notranslate"><span class="pre">Homography.forward()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.geometry.transform.image_registrator.Homography.forward_inverse"><code class="docutils literal notranslate"><span class="pre">Homography.forward_inverse()</span></code></a></li>
