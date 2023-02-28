@@ -1579,6 +1579,90 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">Fals
 </dl>
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="kornia.augmentation.RandomMedianBlur">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.augmentation.</span></span><span class="sig-name descname"><span class="pre">RandomMedianBlur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(3,</span> <span class="pre">3)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">same_on_batch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keepdim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/augmentation/_2d/intensity/median_blur.html#RandomMedianBlur"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.augmentation.RandomMedianBlur" title="Permalink to this definition">#</a></dt>
+<dd><p>Add random blur with a median filter to an image tensor.</p>
+<img alt="_images/RandomMedianBlur.png" src="_images/RandomMedianBlur.png" />
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kernel_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>], <em>optional</em>) – the blurring kernel size.
+Default:  <code class="code docutils literal notranslate"><span class="pre">(3,</span> <span class="pre">3)</span></code></p></li>
+<li><p><strong>same_on_batch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <em>optional</em>) – apply the same transformation across the batch.
+Default:  <code class="code docutils literal notranslate"><span class="pre">False</span></code></p></li>
+<li><p><strong>p</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <em>optional</em>) – probability of applying the transformation.
+Default:  <code class="code docutils literal notranslate"><span class="pre">0.5</span></code></p></li>
+<li><p><strong>keepdim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <em>optional</em>) – whether to keep the output shape the same as input (True) or broadcast it
+to the batch form (False).
+Default:  <code class="code docutils literal notranslate"><span class="pre">False</span></code></p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function internally uses <a class="reference internal" href="filters.html#kornia.filters.median_blur" title="kornia.filters.median_blur"><code class="xref py py-func docutils literal notranslate"><span class="pre">kornia.filters.median_blur()</span></code></a>.</p>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">RandomMedianBlur</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">torch.Size([1, 1, 4, 4])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span>
+<span class="go">tensor([[[[0., 1., 1., 0.],</span>
+<span class="go">          [1., 1., 1., 1.],</span>
+<span class="go">          [1., 1., 1., 1.],</span>
+<span class="go">          [0., 1., 1., 0.]]]])</span>
+</pre></div>
+</div>
+<dl>
+<dt>To apply the exact augmenation again, you may take the advantage of the previous parameter state:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aug</span> <span class="o">=</span> <span class="n">RandomMedianBlur</span><span class="p">((</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">p</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">aug</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span> <span class="o">==</span> <span class="n">aug</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">aug</span><span class="o">.</span><span class="n">_params</span><span class="p">))</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="go">tensor(True)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="kornia.augmentation.RandomSnow">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.augmentation.</span></span><span class="sig-name descname"><span class="pre">RandomSnow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">snow_coefficient</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0.5,</span> <span class="pre">0.5)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brightness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(2,</span> <span class="pre">2)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">same_on_batch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keepdim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/augmentation/_2d/intensity/random_snow.html#RandomSnow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.augmentation.RandomSnow" title="Permalink to this definition">#</a></dt>
+<dd><p>Generates snow effect on given tensor image or a batch tensor images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>snow_coefficient</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <em>optional</em>) – A tuple of floats (lower and upper bound) between 0 and 1 that control
+Default:  <code class="code docutils literal notranslate"><span class="pre">(0.5,</span> <span class="pre">0.5)</span></code></p></li>
+<li><p><strong>image</strong> (<em>the amount</em><em> of </em><em>snow to add to the</em>) – </p></li>
+<li><p><strong>snow.</strong> (<em>brightness</em><em> of </em><em>the</em>) – </p></li>
+<li><p><strong>brightness</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <em>optional</em>) – A tuple of floats (lower and upper bound) greater than 1 that controls the
+Default:  <code class="code docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">2)</span></code></p></li>
+<li><p><strong>snow.</strong> – </p></li>
+<li><p><strong>same_on_batch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <em>optional</em>) – If True, apply the same transformation to each image in a batch. Default: False.</p></li>
+<li><p><strong>p</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <em>optional</em>) – Probability of applying the transformation. Default: 0.5.</p></li>
+<li><p><strong>keepdim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <em>optional</em>) – Keep the output tensor with the same shape as input. Default: False.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Shape:</dt><dd><ul class="simple">
+<li><p>Input: <span class="math notranslate nohighlight">\((C, H, W)\)</span> or <span class="math notranslate nohighlight">\((B, C, H, W)\)</span></p></li>
+<li><p>Output: <span class="math notranslate nohighlight">\((B, C, H, W)\)</span></p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">inputs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">snow</span> <span class="o">=</span> <span class="n">kornia</span><span class="o">.</span><span class="n">augmentation</span><span class="o">.</span><span class="n">RandomSnow</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">snow_coefficient</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">),</span> <span class="n">brightness</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">snow</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">torch.Size([2, 3, 4, 4])</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 <section id="geometric">
 <h3>Geometric<a class="headerlink" href="#geometric" title="Permalink to this heading">#</a></h3>
@@ -3601,6 +3685,8 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">Fals
 <li><a class="reference internal" href="#kornia.augmentation.RandomSaturation"><code class="docutils literal notranslate"><span class="pre">RandomSaturation</span></code></a></li>
 <li><a class="reference internal" href="#kornia.augmentation.RandomSharpness"><code class="docutils literal notranslate"><span class="pre">RandomSharpness</span></code></a></li>
 <li><a class="reference internal" href="#kornia.augmentation.RandomSolarize"><code class="docutils literal notranslate"><span class="pre">RandomSolarize</span></code></a></li>
+<li><a class="reference internal" href="#kornia.augmentation.RandomMedianBlur"><code class="docutils literal notranslate"><span class="pre">RandomMedianBlur</span></code></a></li>
+<li><a class="reference internal" href="#kornia.augmentation.RandomSnow"><code class="docutils literal notranslate"><span class="pre">RandomSnow</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#geometric">Geometric</a><ul>
