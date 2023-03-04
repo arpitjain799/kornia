@@ -495,6 +495,47 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">True
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="kornia.filters.joint_bilateral_blur">
+<span class="sig-prename descclassname"><span class="pre">kornia.filters.</span></span><span class="sig-name descname"><span class="pre">joint_bilateral_blur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guidance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_color</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">border_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'reflect'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_distance_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'l1'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/filters/bilateral.html#joint_bilateral_blur"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.filters.joint_bilateral_blur" title="Permalink to this definition">#</a></dt>
+<dd><p>Blur a tensor using a Joint Bilateral filter.</p>
+<img alt="_images/joint_bilateral_blur.png" src="_images/joint_bilateral_blur.png" />
+<p>This operator is almost identical to a Bilateral filter. The only difference
+is that the color Gaussian kernel is computed based on another image called
+a guidance image. See <a class="reference internal" href="#kornia.filters.bilateral_blur" title="kornia.filters.bilateral_blur"><code class="xref py py-func docutils literal notranslate"><span class="pre">bilateral_blur()</span></code></a> for more information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> – the input tensor with shape <span class="math notranslate nohighlight">\((B,C,H,W)\)</span>.</p></li>
+<li><p><strong>guidance</strong> – the guidance tensor with shape <span class="math notranslate nohighlight">\((B,C,H,W)\)</span>.</p></li>
+<li><p><strong>kernel_size</strong> – the size of the kernel.</p></li>
+<li><p><strong>sigma_color</strong> – the standard deviation for intensity/color Gaussian kernel.
+Smaller values preserve more edges.</p></li>
+<li><p><strong>sigma_space</strong> – the standard deviation for spatial Gaussian kernel.
+This is similar to <code class="docutils literal notranslate"><span class="pre">sigma</span></code> in <a class="reference internal" href="#kornia.filters.gaussian_blur2d" title="kornia.filters.gaussian_blur2d"><code class="xref py py-func docutils literal notranslate"><span class="pre">gaussian_blur2d()</span></code></a>.</p></li>
+<li><p><strong>border_type</strong> (<em>optional</em>) – the padding mode to be applied before convolving.
+The expected modes are: <code class="docutils literal notranslate"><span class="pre">'constant'</span></code>, <code class="docutils literal notranslate"><span class="pre">'reflect'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'replicate'</span></code> or <code class="docutils literal notranslate"><span class="pre">'circular'</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">'reflect'</span></code>.</p></li>
+<li><p><strong>color_distance_type</strong> (<em>optional</em>) – the type of distance to calculate intensity/color
+difference. Only <code class="docutils literal notranslate"><span class="pre">'l1'</span></code> or <code class="docutils literal notranslate"><span class="pre">'l2'</span></code> is allowed. Use <code class="docutils literal notranslate"><span class="pre">'l1'</span></code> to
+match OpenCV implementation.
+Default:  <code class="code docutils literal notranslate"><span class="pre">'l1'</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the blurred tensor with shape <span class="math notranslate nohighlight">\((B, C, H, W)\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">guidance</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">joint_bilateral_blur</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">guidance</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mf">0.1</span><span class="p">,</span> <span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">torch.Size([2, 4, 5, 5])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="kornia.filters.max_blur_pool2d">
 <span class="sig-prename descclassname"><span class="pre">kornia.filters.</span></span><span class="sig-name descname"><span class="pre">max_blur_pool2d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stride</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_pool_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ceil_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/filters/blur_pool.html#max_blur_pool2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.filters.max_blur_pool2d" title="Permalink to this definition">#</a></dt>
 <dd><p>Compute pools and blurs and downsample a given feature map.</p>
@@ -1630,7 +1671,7 @@ to the center pixel, but also the difference in intensity or color.</p>
 <li><p><strong>sigma_color</strong> – the standard deviation for intensity/color Gaussian kernel.
 Smaller values preserve more edges.</p></li>
 <li><p><strong>sigma_space</strong> – the standard deviation for spatial Gaussian kernel.
-This is similar to <code class="docutils literal notranslate"><span class="pre">sigma</span></code> in gaussian_blur2d.</p></li>
+This is similar to <code class="docutils literal notranslate"><span class="pre">sigma</span></code> in <a class="reference internal" href="#kornia.filters.gaussian_blur2d" title="kornia.filters.gaussian_blur2d"><code class="xref py py-func docutils literal notranslate"><span class="pre">gaussian_blur2d()</span></code></a>.</p></li>
 <li><p><strong>border_type</strong> (<em>optional</em>) – the padding mode to be applied before convolving.
 The expected modes are: <code class="docutils literal notranslate"><span class="pre">'constant'</span></code>, <code class="docutils literal notranslate"><span class="pre">'reflect'</span></code>,
 <code class="docutils literal notranslate"><span class="pre">'replicate'</span></code> or <code class="docutils literal notranslate"><span class="pre">'circular'</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">'reflect'</span></code>.</p></li>
@@ -1871,6 +1912,52 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">True
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="kornia.filters.JointBilateralBlur">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.filters.</span></span><span class="sig-name descname"><span class="pre">JointBilateralBlur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_space</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">border_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'reflect'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_distance_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'l1'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/filters/bilateral.html#JointBilateralBlur"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.filters.JointBilateralBlur" title="Permalink to this definition">#</a></dt>
+<dd><p>Blur a tensor using a Joint Bilateral filter.</p>
+<p>This operator is almost identical to a Bilateral filter. The only difference
+is that the color Gaussian kernel is computed based on another image called
+a guidance image. See <a class="reference internal" href="#kornia.filters.BilateralBlur" title="kornia.filters.BilateralBlur"><code class="xref py py-class docutils literal notranslate"><span class="pre">BilateralBlur</span></code></a> for more information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kernel_size</strong> – the size of the kernel.</p></li>
+<li><p><strong>sigma_color</strong> – the standard deviation for intensity/color Gaussian kernel.
+Smaller values preserve more edges.</p></li>
+<li><p><strong>sigma_space</strong> – the standard deviation for spatial Gaussian kernel.
+This is similar to <code class="docutils literal notranslate"><span class="pre">sigma</span></code> in <a class="reference internal" href="#kornia.filters.gaussian_blur2d" title="kornia.filters.gaussian_blur2d"><code class="xref py py-func docutils literal notranslate"><span class="pre">gaussian_blur2d()</span></code></a>.</p></li>
+<li><p><strong>border_type</strong> (<em>optional</em>) – the padding mode to be applied before convolving.
+The expected modes are: <code class="docutils literal notranslate"><span class="pre">'constant'</span></code>, <code class="docutils literal notranslate"><span class="pre">'reflect'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'replicate'</span></code> or <code class="docutils literal notranslate"><span class="pre">'circular'</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">'reflect'</span></code>.</p></li>
+<li><p><strong>color_distance_type</strong> (<em>optional</em>) – the type of distance to calculate intensity/color
+difference. Only <code class="docutils literal notranslate"><span class="pre">'l1'</span></code> or <code class="docutils literal notranslate"><span class="pre">'l2'</span></code> is allowed. Use <code class="docutils literal notranslate"><span class="pre">'l1'</span></code> to
+match OpenCV implementation.
+Default:  <code class="code docutils literal notranslate"><span class="pre">'l1'</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the blurred input tensor.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Shape:</dt><dd><ul class="simple">
+<li><p>Input: <span class="math notranslate nohighlight">\((B, C, H, W)\)</span>, <span class="math notranslate nohighlight">\((B, C, H, W)\)</span></p></li>
+<li><p>Output: <span class="math notranslate nohighlight">\((B, C, H, W)\)</span></p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">guidance</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blur</span> <span class="o">=</span> <span class="n">JointBilateralBlur</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mf">0.1</span><span class="p">,</span> <span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">blur</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">guidance</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">torch.Size([2, 4, 5, 5])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="kornia.filters.MotionBlur">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.filters.</span></span><span class="sig-name descname"><span class="pre">MotionBlur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">border_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'constant'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/filters/motion.html#MotionBlur"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.filters.MotionBlur" title="Permalink to this definition">#</a></dt>
 <dd><p>Blur 2D images (4D tensor) using the motion filter.</p>
@@ -2013,6 +2100,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">'ref
 <li><a class="reference internal" href="#kornia.filters.blur_pool2d"><code class="docutils literal notranslate"><span class="pre">blur_pool2d()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.filters.box_blur"><code class="docutils literal notranslate"><span class="pre">box_blur()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.filters.gaussian_blur2d"><code class="docutils literal notranslate"><span class="pre">gaussian_blur2d()</span></code></a></li>
+<li><a class="reference internal" href="#kornia.filters.joint_bilateral_blur"><code class="docutils literal notranslate"><span class="pre">joint_bilateral_blur()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.filters.max_blur_pool2d"><code class="docutils literal notranslate"><span class="pre">max_blur_pool2d()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.filters.median_blur"><code class="docutils literal notranslate"><span class="pre">median_blur()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.filters.motion_blur"><code class="docutils literal notranslate"><span class="pre">motion_blur()</span></code></a></li>
@@ -2060,6 +2148,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">'ref
 <li><a class="reference internal" href="#kornia.filters.MaxBlurPool2D"><code class="docutils literal notranslate"><span class="pre">MaxBlurPool2D</span></code></a></li>
 <li><a class="reference internal" href="#kornia.filters.MedianBlur"><code class="docutils literal notranslate"><span class="pre">MedianBlur</span></code></a></li>
 <li><a class="reference internal" href="#kornia.filters.GaussianBlur2d"><code class="docutils literal notranslate"><span class="pre">GaussianBlur2d</span></code></a></li>
+<li><a class="reference internal" href="#kornia.filters.JointBilateralBlur"><code class="docutils literal notranslate"><span class="pre">JointBilateralBlur</span></code></a></li>
 <li><a class="reference internal" href="#kornia.filters.MotionBlur"><code class="docutils literal notranslate"><span class="pre">MotionBlur</span></code></a></li>
 <li><a class="reference internal" href="#kornia.filters.UnsharpMask"><code class="docutils literal notranslate"><span class="pre">UnsharpMask</span></code></a></li>
 </ul>
