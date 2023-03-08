@@ -1699,12 +1699,12 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">True
 <span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">normalize_laf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">LAF</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/laf.html#normalize_laf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.normalize_laf" title="Permalink to this definition">#</a></dt>
 <dd><dl class="simple">
 <dt>Normalize LAFs to [0,1] scale from pixel scale. See below:</dt><dd><p>B,N,H,W = images.size()
-MIN_SIZE = min(H,W)
+MIN_SIZE =  min(H - 1, W -1)
 [a11 a21 x]
 [a21 a22 y]
 becomes:
-[a11/MIN_SIZE a21/MIN_SIZE x/W]
-[a21/MIN_SIZE a22/MIN_SIZE y/H]</p>
+[a11/MIN_SIZE a21/MIN_SIZE x/(W-1)]
+[a21/MIN_SIZE a22/MIN_SIZE y/(H-1)]</p>
 </dd>
 </dl>
 <dl class="field-list simple">
@@ -1726,15 +1726,16 @@ becomes:
 <dl class="py function">
 <dt class="sig sig-object py" id="kornia.feature.denormalize_laf">
 <span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">denormalize_laf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">LAF</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/laf.html#denormalize_laf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.denormalize_laf" title="Permalink to this definition">#</a></dt>
-<dd><p>De-normalize LAFs from scale to image scale.</p>
+<dd><p>De-normalize LAFs from scale to image scale. The convention is that center of 5-pixel image (coordinates
+from 0 to 4) is 2, and not 2.5.</p>
 <blockquote>
 <div><p>B,N,H,W = images.size()
-MIN_SIZE = min(H,W)
+MIN_SIZE = min(H - 1, W -1)
 [a11 a21 x]
 [a21 a22 y]
 becomes
-[a11*MIN_SIZE a21*MIN_SIZE x*W]
-[a21*MIN_SIZE a22*MIN_SIZE y*H]</p>
+[a11*MIN_SIZE a21*MIN_SIZE x*(W-1)]
+[a21*MIN_SIZE a22*MIN_SIZE y*(W-1)]</p>
 </div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1875,7 +1876,8 @@ by inverse matrix square root: A = invsqrt([a b; b c]).</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="kornia.feature.get_laf_center">
 <span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">get_laf_center</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">LAF</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/laf.html#get_laf_center"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.get_laf_center" title="Permalink to this definition">#</a></dt>
-<dd><p>Return a center (keypoint) of the LAFs.</p>
+<dd><p>Return a center (keypoint) of the LAFs. The convention is that center of 5-pixel image (coordinates from 0
+to 4) is 2, and not 2.5.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>LAF</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a>) – <span class="math notranslate nohighlight">\((B, N, 2, 3)\)</span></p>
@@ -1892,6 +1894,27 @@ by inverse matrix square root: A = invsqrt([a b; b c]).</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">get_laf_center</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>  <span class="c1"># BxNx2</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kornia.feature.rotate_laf">
+<span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">rotate_laf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">LAF</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angles_degrees</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/laf.html#rotate_laf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.rotate_laf" title="Permalink to this definition">#</a></dt>
+<dd><p>Apply additional rotation to the the LAFs. Compared to <cite>set_laf_orientation</cite>, the resulting rotation is
+original LAF orientation plus angles_degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>LAF</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a>) – <span class="math notranslate nohighlight">\((B, N, 2, 3)\)</span></p></li>
+<li><p><strong>angles</strong> – <span class="math notranslate nohighlight">\((B, N, 1)\)</span> in degrees.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>LAF oriented with angles <span class="math notranslate nohighlight">\((B, N, 2, 3)\)</span></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -1914,6 +1937,26 @@ by inverse matrix square root: A = invsqrt([a b; b c]).</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">get_laf_orientation</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>  <span class="c1"># BxNx1</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kornia.feature.set_laf_orientation">
+<span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">set_laf_orientation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">LAF</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angles_degrees</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/laf.html#set_laf_orientation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.set_laf_orientation" title="Permalink to this definition">#</a></dt>
+<dd><p>Change the orientation of the LAFs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>LAF</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a>) – <span class="math notranslate nohighlight">\((B, N, 2, 3)\)</span></p></li>
+<li><p><strong>angles</strong> – <span class="math notranslate nohighlight">\((B, N, 1)\)</span> in degrees.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>LAF oriented with angles <span class="math notranslate nohighlight">\((B, N, 2, 3)\)</span></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -2839,7 +2882,9 @@ registered hooks while the latter silently ignores them.</p>
 <li><a class="reference internal" href="#kornia.feature.scale_laf"><code class="docutils literal notranslate"><span class="pre">scale_laf()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.feature.get_laf_scale"><code class="docutils literal notranslate"><span class="pre">get_laf_scale()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.feature.get_laf_center"><code class="docutils literal notranslate"><span class="pre">get_laf_center()</span></code></a></li>
+<li><a class="reference internal" href="#kornia.feature.rotate_laf"><code class="docutils literal notranslate"><span class="pre">rotate_laf()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.feature.get_laf_orientation"><code class="docutils literal notranslate"><span class="pre">get_laf_orientation()</span></code></a></li>
+<li><a class="reference internal" href="#kornia.feature.set_laf_orientation"><code class="docutils literal notranslate"><span class="pre">set_laf_orientation()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.feature.laf_from_center_scale_ori"><code class="docutils literal notranslate"><span class="pre">laf_from_center_scale_ori()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.feature.laf_is_inside_image"><code class="docutils literal notranslate"><span class="pre">laf_is_inside_image()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.feature.laf_to_three_points"><code class="docutils literal notranslate"><span class="pre">laf_to_three_points()</span></code></a></li>
