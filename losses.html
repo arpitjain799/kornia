@@ -1236,7 +1236,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">None
 
 <dl class="py function">
 <dt class="sig sig-object py" id="kornia.losses.dice_loss">
-<span class="sig-prename descclassname"><span class="pre">kornia.losses.</span></span><span class="sig-name descname"><span class="pre">dice_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/losses/dice.html#dice_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.losses.dice_loss" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">kornia.losses.</span></span><span class="sig-name descname"><span class="pre">dice_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">average</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'micro'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/losses/dice.html#dice_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.losses.dice_loss" title="Permalink to this definition">#</a></dt>
 <dd><p>Criterion that computes Sørensen-Dice Coefficient loss.</p>
 <p>According to [1], we compute the Sørensen-Dice Coefficient as follows:</p>
 <div class="math-wrapper docutils container">
@@ -1265,6 +1265,10 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">None
 <li><p><strong>input</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a>) – logits tensor with shape <span class="math notranslate nohighlight">\((N, C, H, W)\)</span> where C = number of classes.</p></li>
 <li><p><strong>labels</strong> – labels tensor with shape <span class="math notranslate nohighlight">\((N, H, W)\)</span> where each value
 is <span class="math notranslate nohighlight">\(0 ≤ targets[i] ≤ C−1\)</span>.</p></li>
+<li><p><strong>average</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <em>optional</em>) – Reduction applied in multi-class scenario:
+- <code class="docutils literal notranslate"><span class="pre">'micro'</span></code> [default]: Calculate the loss across all classes.
+- <code class="docutils literal notranslate"><span class="pre">'macro'</span></code>: Calculate the loss for each class separately and average the metrics across classes.
+Default:  <code class="code docutils literal notranslate"><span class="pre">'micro'</span></code></p></li>
 <li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <em>optional</em>) – Scalar to enforce numerical stabiliy.
 Default:  <code class="code docutils literal notranslate"><span class="pre">1e-08</span></code></p></li>
 </ul>
@@ -1273,7 +1277,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">1e-0
 <dd class="field-even"><p><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>the computed loss.</p>
+<dd class="field-odd"><p>One-element tensor of the computed loss.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -1504,7 +1508,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">None
 
 <dl class="py class">
 <dt class="sig sig-object py" id="kornia.losses.DiceLoss">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.losses.</span></span><span class="sig-name descname"><span class="pre">DiceLoss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/losses/dice.html#DiceLoss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.losses.DiceLoss" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.losses.</span></span><span class="sig-name descname"><span class="pre">DiceLoss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">average</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'micro'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/losses/dice.html#DiceLoss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.losses.DiceLoss" title="Permalink to this definition">#</a></dt>
 <dd><p>Criterion that computes Sørensen-Dice Coefficient loss.</p>
 <p>According to [1], we compute the Sørensen-Dice Coefficient as follows:</p>
 <div class="math-wrapper docutils container">
@@ -1529,8 +1533,14 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">None
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <em>optional</em>) – Scalar to enforce numerical stabiliy.
-Default:  <code class="code docutils literal notranslate"><span class="pre">1e-08</span></code></p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>average</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <em>optional</em>) – Reduction applied in multi-class scenario:
+- <code class="docutils literal notranslate"><span class="pre">'micro'</span></code> [default]: Calculate the loss across all classes.
+- <code class="docutils literal notranslate"><span class="pre">'macro'</span></code>: Calculate the loss for each class separately and average the metrics across classes.
+Default:  <code class="code docutils literal notranslate"><span class="pre">'micro'</span></code></p></li>
+<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <em>optional</em>) – Scalar to enforce numerical stabiliy.
+Default:  <code class="code docutils literal notranslate"><span class="pre">1e-08</span></code></p></li>
+</ul>
 </dd>
 </dl>
 <dl class="simple">
