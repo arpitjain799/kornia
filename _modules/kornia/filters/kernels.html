@@ -780,16 +780,17 @@
     <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Function that returns Gaussian filter coefficients.</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        kernel_size: filter size. It should be odd and positive.</span>
 <span class="sd">        sigma: gaussian standard deviation.</span>
 <span class="sd">        force_even: overrides requirement for odd kernel size.</span>
 <span class="sd">        device: This value will be used if sigma is a float. Device desired to compute.</span>
 <span class="sd">        dtype: This value will be used if sigma is a float. Dtype desired for compute.</span>
+
 <span class="sd">    Returns:</span>
-<span class="sd">        gaussian filter coefficients</span>
-<span class="sd">    Shape:</span>
-<span class="sd">        - Output: :math:`(B, \text{kernel_size})`.</span>
+<span class="sd">        gaussian filter coefficients with shape :math:`(B, \text{kernel_size})`.</span>
+
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; get_gaussian_kernel1d(3, 2.5)</span>
 <span class="sd">        tensor([[0.3243, 0.3513, 0.3243]])</span>
@@ -812,18 +813,20 @@
     <span class="n">device</span><span class="p">:</span> <span class="n">Device</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Function that returns Gaussian filter coefficients based on the modified Bessel functions. Adapted from:</span>
-<span class="sd">    https://github.com/Project-MONAI/MONAI/blob/master/monai/networks/layers/convutils.py.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Function that returns Gaussian filter coefficients based on the modified Bessel functions.</span>
+
+<span class="sd">    Adapted from: https://github.com/Project-MONAI/MONAI/blob/master/monai/networks/layers/convutils.py.</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        kernel_size: filter size. It should be odd and positive.</span>
 <span class="sd">        sigma: gaussian standard deviation. If a tensor, should be in a shape :math:`(B, 1)`</span>
 <span class="sd">        force_even: overrides requirement for odd kernel size.</span>
 <span class="sd">        device: This value will be used if sigma is a float. Device desired to compute.</span>
 <span class="sd">        dtype: This value will be used if sigma is a float. Dtype desired for compute.</span>
+
 <span class="sd">    Returns:</span>
-<span class="sd">        1D tensor with gaussian filter coefficients.</span>
-<span class="sd">    Shape:</span>
-<span class="sd">        - Output: :math:`(B, \text{kernel_size})`</span>
+<span class="sd">        1D tensor with gaussian filter coefficients. With shape :math:`(B, \text{kernel_size})`</span>
+
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; get_gaussian_discrete_kernel1d(3, 2.5)</span>
 <span class="sd">        tensor([[0.3235, 0.3531, 0.3235]])</span>
@@ -846,18 +849,20 @@
     <span class="n">device</span><span class="p">:</span> <span class="n">Device</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Function that returns Gaussian filter coefficients by interpolating the error function, adapted from:</span>
-<span class="sd">    https://github.com/Project-MONAI/MONAI/blob/master/monai/networks/layers/convutils.py.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Function that returns Gaussian filter coefficients by interpolating the error function.</span>
+
+<span class="sd">    Adapted from: https://github.com/Project-MONAI/MONAI/blob/master/monai/networks/layers/convutils.py.</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        kernel_size: filter size. It should be odd and positive.</span>
 <span class="sd">        sigma: gaussian standard deviation. If a tensor, should be in a shape :math:`(B, 1)`</span>
 <span class="sd">        force_even: overrides requirement for odd kernel size.</span>
 <span class="sd">        device: This value will be used if sigma is a float. Device desired to compute.</span>
 <span class="sd">        dtype: This value will be used if sigma is a float. Dtype desired for compute.</span>
+
 <span class="sd">    Returns:</span>
-<span class="sd">        1D tensor with gaussian filter coefficients.</span>
-<span class="sd">    Shape:</span>
-<span class="sd">        - Output: :math:`(B, \text{kernel_size})`</span>
+<span class="sd">        1D tensor with gaussian filter coefficients. Shape :math:`(B, \text{kernel_size})`</span>
+
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; get_gaussian_erf_kernel1d(3, 2.5)</span>
 <span class="sd">        tensor([[0.3245, 0.3511, 0.3245]])</span>
@@ -881,16 +886,20 @@
     <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Function that returns Gaussian filter matrix coefficients.</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        kernel_size: filter sizes in the x and y direction. Sizes should be odd and positive.</span>
 <span class="sd">        sigma: gaussian standard deviation in the x and y.</span>
 <span class="sd">        force_even: overrides requirement for odd kernel size.</span>
 <span class="sd">        device: This value will be used if sigma is a float. Device desired to compute.</span>
 <span class="sd">        dtype: This value will be used if sigma is a float. Dtype desired for compute.</span>
+
 <span class="sd">    Returns:</span>
 <span class="sd">        2D tensor with gaussian filter matrix coefficients.</span>
+
 <span class="sd">    Shape:</span>
 <span class="sd">        - Output: :math:`(B, \text{kernel_size}_x, \text{kernel_size}_y)`</span>
+
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; get_gaussian_kernel2d((5, 5), (1.5, 1.5))</span>
 <span class="sd">        tensor([[[0.0144, 0.0281, 0.0351, 0.0281, 0.0144],</span>
@@ -933,16 +942,20 @@
     <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Function that returns Gaussian filter matrix coefficients.</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        kernel_size: filter sizes in the x, y and z direction. Sizes should be odd and positive.</span>
 <span class="sd">        sigma: gaussian standard deviation in the x, y and z direction.</span>
 <span class="sd">        force_even: overrides requirement for odd kernel size.</span>
 <span class="sd">        device: This value will be used if sigma is a float. Device desired to compute.</span>
 <span class="sd">        dtype: This value will be used if sigma is a float. Dtype desired for compute.</span>
+
 <span class="sd">    Returns:</span>
 <span class="sd">        3D tensor with gaussian filter matrix coefficients.</span>
+
 <span class="sd">    Shape:</span>
 <span class="sd">        - Output: :math:`(B, \text{kernel_size}_x, \text{kernel_size}_y,  \text{kernel_size}_z)`</span>
+
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; get_gaussian_kernel3d((3, 3, 3), (1.5, 1.5, 1.5))</span>
 <span class="sd">        tensor([[[[0.0292, 0.0364, 0.0292],</span>
@@ -984,14 +997,18 @@
 
 <div class="viewcode-block" id="get_laplacian_kernel1d"><a class="viewcode-back" href="../../../filters.html#kornia.filters.get_laplacian_kernel1d">[docs]</a><span class="k">def</span> <span class="nf">get_laplacian_kernel1d</span><span class="p">(</span><span class="n">kernel_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">Device</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Function that returns the coefficients of a 1D Laplacian filter.</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        kernel_size: filter size. It should be odd and positive.</span>
 <span class="sd">        device: tensor device desired to create the kernel</span>
 <span class="sd">        dtype: tensor dtype desired to create the kernel</span>
+
 <span class="sd">    Returns:</span>
 <span class="sd">        1D tensor with laplacian filter coefficients.</span>
+
 <span class="sd">    Shape:</span>
 <span class="sd">        - Output: math:`(\text{kernel_size})`</span>
+
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; get_laplacian_kernel1d(3)</span>
 <span class="sd">        tensor([ 1., -2.,  1.])</span>
@@ -1009,14 +1026,18 @@
     <span class="n">kernel_size</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">Device</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">float32</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Function that returns Gaussian filter matrix coefficients.</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        kernel_size: filter size should be odd.</span>
 <span class="sd">        device: tensor device desired to create the kernel</span>
 <span class="sd">        dtype: tensor dtype desired to create the kernel</span>
+
 <span class="sd">    Returns:</span>
 <span class="sd">        2D tensor with laplacian filter matrix coefficients.</span>
+
 <span class="sd">    Shape:</span>
 <span class="sd">        - Output: :math:`(\text{kernel_size}_x, \text{kernel_size}_y)`</span>
+
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; get_laplacian_kernel2d(3)</span>
 <span class="sd">        tensor([[ 1.,  1.,  1.],</span>
@@ -1046,14 +1067,17 @@
     <span class="n">kernel_size</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="n">norm</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">Device</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate pascal filter kernel by kernel size.</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        kernel_size: height and width of the kernel.</span>
 <span class="sd">        norm: if to normalize the kernel or not. Default: True.</span>
 <span class="sd">        device: tensor device desired to create the kernel</span>
 <span class="sd">        dtype: tensor dtype desired to create the kernel</span>
+
 <span class="sd">    Returns:</span>
 <span class="sd">        if kernel_size is an integer the kernel will be shaped as :math:`(kernel_size, kernel_size)`</span>
 <span class="sd">        otherwise the kernel will be shaped as :math: `kernel_size`</span>
+
 <span class="sd">    Examples:</span>
 <span class="sd">    &gt;&gt;&gt; get_pascal_kernel_2d(1)</span>
 <span class="sd">    tensor([[1.]])</span>
@@ -1082,13 +1106,16 @@
     <span class="n">kernel_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">norm</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">Device</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate Yang Hui triangle (Pascal&#39;s triangle) by a given number.</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        kernel_size: height and width of the kernel.</span>
 <span class="sd">        norm: if to normalize the kernel or not. Default: False.</span>
 <span class="sd">        device: tensor device desired to create the kernel</span>
 <span class="sd">        dtype: tensor dtype desired to create the kernel</span>
+
 <span class="sd">    Returns:</span>
 <span class="sd">        kernel shaped as :math:`(kernel_size,)`</span>
+
 <span class="sd">    Examples:</span>
 <span class="sd">    &gt;&gt;&gt; get_pascal_kernel_1d(1)</span>
 <span class="sd">    tensor([1.])</span>
@@ -1160,20 +1187,22 @@
 
 
 <div class="viewcode-block" id="get_hanning_kernel1d"><a class="viewcode-back" href="../../../filters.html#kornia.filters.get_hanning_kernel1d">[docs]</a><span class="k">def</span> <span class="nf">get_hanning_kernel1d</span><span class="p">(</span><span class="n">kernel_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">Device</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns Hanning (also known as Hann) kernel, used in signal processing and KCF tracker.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns Hanning (also known as Hann) kernel, used in signal processing and KCF tracker.</span>
 
 <span class="sd">    .. math::  w(n) = 0.5 - 0.5cos\\left(\\frac{2\\pi{n}}{M-1}\\right)</span>
 <span class="sd">               \\qquad 0 \\leq n \\leq M-1</span>
+
 <span class="sd">    See further in numpy docs https://numpy.org/doc/stable/reference/generated/numpy.hanning.html</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        kernel_size: The size the of the kernel. It should be positive.</span>
 <span class="sd">        device: tensor device desired to create the kernel</span>
 <span class="sd">        dtype: tensor dtype desired to create the kernel</span>
+
 <span class="sd">    Returns:</span>
-<span class="sd">        1D tensor with Hanning filter coefficients.</span>
-<span class="sd">            .. math::  w(n) = 0.5 - 0.5cos\\left(\\frac{2\\pi{n}}{M-1}\\right)</span>
-<span class="sd">    Shape:</span>
-<span class="sd">        - Output: math:`(\text{kernel_size})`</span>
+<span class="sd">        1D tensor with Hanning filter coefficients. Shape math:`(\text{kernel_size})`</span>
+<span class="sd">        .. math::  w(n) = 0.5 - 0.5cos\\left(\\frac{2\\pi{n}}{M-1}\\right)</span>
+
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; get_hanning_kernel1d(4)</span>
 <span class="sd">        tensor([0.0000, 0.7500, 0.7500, 0.0000])</span>
@@ -1189,15 +1218,15 @@
     <span class="n">kernel_size</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">Device</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns 2d Hanning kernel, used in signal processing and KCF tracker.</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        kernel_size: The size of the kernel for the filter. It should be positive.</span>
 <span class="sd">        device: tensor device desired to create the kernel</span>
 <span class="sd">        dtype: tensor dtype desired to create the kernel</span>
+
 <span class="sd">    Returns:</span>
-<span class="sd">        2D tensor with Hanning filter coefficients.</span>
-<span class="sd">            .. math::  w(n) = 0.5 - 0.5cos\\left(\\frac{2\\pi{n}}{M-1}\\right)</span>
-<span class="sd">    Shape:</span>
-<span class="sd">        - Output: math:`(\text{kernel_size[0], kernel_size[1]})`</span>
+<span class="sd">        2D tensor with Hanning filter coefficients. Shape: math:`(\text{kernel_size[0], kernel_size[1]})`</span>
+<span class="sd">        .. math::  w(n) = 0.5 - 0.5cos\\left(\\frac{2\\pi{n}}{M-1}\\right)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">kernel_size</span> <span class="o">=</span> <span class="n">_unpack_2d_ks</span><span class="p">(</span><span class="n">kernel_size</span><span class="p">)</span>
     <span class="n">_check_kernel_size</span><span class="p">(</span><span class="n">kernel_size</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">allow_even</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
