@@ -315,6 +315,7 @@
 <dt class="sig sig-object py" id="kornia.feature.gftt_response">
 <span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">gftt_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grads_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sobel'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigmas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/responses.html#gftt_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.gftt_response" title="Permalink to this definition">#</a></dt>
 <dd><p>Compute the Shi-Tomasi cornerness function.</p>
+<img alt="_images/gftt_response.png" src="_images/gftt_response.png" />
 <p>Function does not do any normalization or nms. The response map is computed according the following formulation:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
@@ -375,6 +376,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">None
 <dt class="sig sig-object py" id="kornia.feature.harris_response">
 <span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">harris_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.04</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grads_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sobel'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigmas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/responses.html#harris_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.harris_response" title="Permalink to this definition">#</a></dt>
 <dd><p>Compute the Harris cornerness function.</p>
+<img alt="_images/harris_response.png" src="_images/harris_response.png" />
 <p>Function does not do any normalization or nms. The response map is computed according the following formulation:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
@@ -440,6 +442,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">None
 <dt class="sig sig-object py" id="kornia.feature.hessian_response">
 <span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">hessian_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grads_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sobel'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigmas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/responses.html#hessian_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.hessian_response" title="Permalink to this definition">#</a></dt>
 <dd><p>Compute the absolute of determinant of the Hessian matrix.</p>
+<img alt="_images/hessian_response.png" src="_images/hessian_response.png" />
 <p>Function does not do any normalization or nms. The response map is computed according the following formulation:</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
@@ -525,6 +528,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">None
 <dt class="sig sig-object py" id="kornia.feature.dog_response_single">
 <span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">dog_response_single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.6</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/responses.html#dog_response_single"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.dog_response_single" title="Permalink to this definition">#</a></dt>
 <dd><p>Compute the Difference-of-Gaussian response.</p>
+<img alt="_images/dog_response_single.png" src="_images/dog_response_single.png" />
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1264,6 +1268,106 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">0.8<
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="kornia.feature.DISK">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">DISK</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">desc_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/disk/disk.html#DISK"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.DISK" title="Permalink to this definition">#</a></dt>
+<dd><p>Module which detects and described local features in an image using the DISK method. See
+<span id="id12">[<a class="reference internal" href="community/bibliography.html#id38" title="Michał Tyszkiewicz, Pascal Fua, and Eduard Trulls. Disk: learning local features with policy gradient. Advances in Neural Information Processing Systems, 33:14254–14265, 2020.">TFT20</a>]</span> for details.</p>
+<img alt="_images/disk_outdoor_depth.jpg" src="_images/disk_outdoor_depth.jpg" />
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>desc_dim</strong> (<em>optional</em>) – The dimension of the descriptor.
+Default:  <code class="code docutils literal notranslate"><span class="pre">128</span></code></p></li>
+<li><p><strong>unet</strong> (<em>optional</em>) – The U-Net to use. If None, a default U-Net is used. Kornia doesn’t provide the training code for DISK
+so this is only useful when using a custom checkpoint trained using the code released with the paper.
+The unet should take as input a tensor of shape <span class="math notranslate nohighlight">\((B, C, H, W)\)</span> and output a tensor of shape
+<span class="math notranslate nohighlight">\((B, \mathrm{desc\_dim} + 1, H, W)\)</span>.
+Default:  <code class="code docutils literal notranslate"><span class="pre">None</span></code></p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">disk</span> <span class="o">=</span> <span class="n">DISK</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;depth&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">images</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">features</span> <span class="o">=</span> <span class="n">disk</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="kornia.feature.DISK.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_if_not_divisible</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/disk/disk.html#DISK.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.DISK.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Detects features in an image, returning keypoint locations, descriptors and detection scores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>images</strong> (<em>Tensor</em>) – The image to detect features in. Shape <span class="math notranslate nohighlight">\((B, 3, H, W)\)</span>.</p></li>
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em> | </em><em>None</em><em>, </em><em>optional</em>) – The maximum number of keypoints to detect. If None, all keypoints are returned.
+Default:  <code class="code docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p><strong>window_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – The size of the non-maxima suppression window used to filter detections.
+Default:  <code class="code docutils literal notranslate"><span class="pre">5</span></code></p></li>
+<li><p><strong>score_threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – The minimum score a detection must have to be returned.
+See <code class="xref py py-class docutils literal notranslate"><span class="pre">DISKFeatures</span></code> for details.
+Default:  <code class="code docutils literal notranslate"><span class="pre">0.0</span></code></p></li>
+<li><p><strong>pad_if_not_divisible</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – if True, the non-32 divisible input is zero-padded to the closes 32-multiply
+Default:  <code class="code docutils literal notranslate"><span class="pre">False</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[DISKFeatures]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of length <span class="math notranslate nohighlight">\(B\)</span> containing the detected features.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kornia.feature.DISK.from_pretrained">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_pretrained</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checkpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'depth'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">torch.device('cpu')</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/disk/disk.html#DISK.from_pretrained"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.DISK.from_pretrained" title="Permalink to this definition">#</a></dt>
+<dd><p>Loads a pretrained model.</p>
+<p>Depth model was trained using depth map supervision and is slightly more precise but biased to detect keypoints
+only where SfM depth is available. Epipolar model was trained using epipolar geometry supervision and
+is less precise but detects keypoints everywhere where they are matchable. The difference is especially
+pronounced on thin structures and on edges of objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>checkpoint</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <em>optional</em>) – The checkpoint to load. One of ‘depth’ or ‘epipolar’.
+Default:  <code class="code docutils literal notranslate"><span class="pre">'depth'</span></code></p></li>
+<li><p><strong>device</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensor_attributes.html#torch.device" title="(in PyTorch v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">device</span></code></a>, <em>optional</em>) – The device to load the model to.
+Default:  <code class="code docutils literal notranslate"><span class="pre">torch.device('cpu')</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#kornia.feature.DISK" title="kornia.feature.disk.disk.DISK"><code class="xref py py-class docutils literal notranslate"><span class="pre">DISK</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The pretrained model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kornia.feature.DISK.heatmap_and_dense_descriptors">
+<span class="sig-name descname"><span class="pre">heatmap_and_dense_descriptors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/disk/disk.html#DISK.heatmap_and_dense_descriptors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.DISK.heatmap_and_dense_descriptors" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the heatmap and the dense descriptors.</p>
+<img alt="_images/DISK.png" src="_images/DISK.png" />
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>images</strong> – The image to detect features in. Shape <span class="math notranslate nohighlight">\((B, 3, H, W)\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Heatmap. Shape <span class="math notranslate nohighlight">\((B, 1, H, W)\)</span>.
+descriptors: Heatmap. Shape <span class="math notranslate nohighlight">\((B, descdim, H, W)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>response</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="kornia.feature.GeometryAwareDescriptorMatcher">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">GeometryAwareDescriptorMatcher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">match_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fginn'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/matching.html#GeometryAwareDescriptorMatcher"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.GeometryAwareDescriptorMatcher" title="Permalink to this definition">#</a></dt>
 <dd><p>Module version of matching functions.</p>
@@ -1457,6 +1561,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">None
 <dt class="sig sig-object py" id="kornia.feature.KeyNetAffNetHardNet">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">KeyNetAffNetHardNet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upright</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">torch.device('cpu')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_laf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/integrated.html#KeyNetAffNetHardNet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.KeyNetAffNetHardNet" title="Permalink to this definition">#</a></dt>
 <dd><p>Convenience module, which implements KeyNet detector + AffNet + HardNet descriptor.</p>
+<img alt="_images/keynet_affnet.jpg" src="_images/keynet_affnet.jpg" />
 <dl class="py method">
 <dt class="sig sig-object py" id="kornia.feature.KeyNetAffNetHardNet.forward">
 <span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kornia.feature.KeyNetAffNetHardNet.forward" title="Permalink to this definition">#</a></dt>
@@ -1584,7 +1689,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">None
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">LoFTR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pretrained</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'outdoor'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">default_cfg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/loftr/loftr.html#LoFTR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.LoFTR" title="Permalink to this definition">#</a></dt>
 <dd><p>Module, which finds correspondences between two images.</p>
 <p>This is based on the original code from paper “LoFTR: Detector-Free Local
-Feature Matching with Transformers”. See <span id="id12">[<a class="reference internal" href="community/bibliography.html#id19" title="Jiaming Sun, Zehong Shen, Yuang Wang, Hujun Bao, and Xiaowei Zhou. LoFTR: detector-free local feature matching with transformers. In CVPR. 2021.">SSW+21</a>]</span> for more details.</p>
+Feature Matching with Transformers”. See <span id="id13">[<a class="reference internal" href="community/bibliography.html#id19" title="Jiaming Sun, Zehong Shen, Yuang Wang, Hujun Bao, and Xiaowei Zhou. LoFTR: detector-free local feature matching with transformers. In CVPR. 2021.">SSW+21</a>]</span> for more details.</p>
 <p>If the distance matrix dm is not provided, <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.cdist.html#torch.cdist" title="(in PyTorch v2.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">torch.cdist()</span></code></a> is used.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -2124,6 +2229,7 @@ LAF-y unit vector.</p>
 <dt class="sig sig-object py" id="kornia.feature.BlobHessian">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">BlobHessian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grads_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sobel'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/responses.html#BlobHessian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.BlobHessian" title="Permalink to this definition">#</a></dt>
 <dd><p>Module that calculates Hessian blobs.</p>
+<img alt="_images/hessian_response.png" src="_images/hessian_response.png" />
 <p>See <a class="reference internal" href="#kornia.feature.hessian_response" title="kornia.feature.hessian_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">hessian_response()</span></code></a> for details.</p>
 </dd></dl>
 
@@ -2131,13 +2237,15 @@ LAF-y unit vector.</p>
 <dt class="sig sig-object py" id="kornia.feature.CornerGFTT">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">CornerGFTT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grads_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sobel'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/responses.html#CornerGFTT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.CornerGFTT" title="Permalink to this definition">#</a></dt>
 <dd><p>Module that calculates Shi-Tomasi corners.</p>
-<p>See <code class="xref py py-func docutils literal notranslate"><span class="pre">gfft_response()</span></code> for details.</p>
+<img alt="_images/gftt_response.png" src="_images/gftt_response.png" />
+<p>See <a class="reference internal" href="#kornia.feature.gftt_response" title="kornia.feature.gftt_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">gftt_response()</span></code></a> for details.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="kornia.feature.CornerHarris">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">CornerHarris</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grads_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sobel'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/responses.html#CornerHarris"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.CornerHarris" title="Permalink to this definition">#</a></dt>
 <dd><p>Module that calculates Harris corners.</p>
+<img alt="_images/harris_response.png" src="_images/harris_response.png" />
 <p>See <a class="reference internal" href="#kornia.feature.harris_response" title="kornia.feature.harris_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">harris_response()</span></code></a> for details.</p>
 </dd></dl>
 
@@ -2152,6 +2260,7 @@ LAF-y unit vector.</p>
 <dt class="sig sig-object py" id="kornia.feature.BlobDoGSingle">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">BlobDoGSingle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigma1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.6</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/responses.html#BlobDoGSingle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.BlobDoGSingle" title="Permalink to this definition">#</a></dt>
 <dd><p>Module that calculates Difference-of-Gaussians blobs.</p>
+<img alt="_images/dog_response_single.png" src="_images/dog_response_single.png" />
 <p>See <a class="reference internal" href="#kornia.feature.dog_response_single" title="kornia.feature.dog_response_single"><code class="xref py py-func docutils literal notranslate"><span class="pre">dog_response_single()</span></code></a> for details.</p>
 </dd></dl>
 
@@ -2159,8 +2268,9 @@ LAF-y unit vector.</p>
 <dt class="sig sig-object py" id="kornia.feature.KeyNet">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">KeyNet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pretrained</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keynet_conf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">keynet_default_config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/keynet.html#KeyNet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.KeyNet" title="Permalink to this definition">#</a></dt>
 <dd><p>Key.Net model definition – local feature detector (response function). This is based on the original code
-from paper “Key.Net: Keypoint Detection by Handcrafted and Learned CNN Filters”. See <span id="id13">[<a class="reference internal" href="community/bibliography.html#id22" title="Axel Barroso-Laguna, Edgar Riba, Daniel Ponsa, and Krystian Mikolajczyk. Key.Net: Keypoint Detection by Handcrafted and Learned CNN Filters. In ICCV. 2019.">BLRPM19</a>]</span> for
+from paper “Key.Net: Keypoint Detection by Handcrafted and Learned CNN Filters”. See <span id="id14">[<a class="reference internal" href="community/bibliography.html#id22" title="Axel Barroso-Laguna, Edgar Riba, Daniel Ponsa, and Krystian Mikolajczyk. Key.Net: Keypoint Detection by Handcrafted and Learned CNN Filters. In ICCV. 2019.">BLRPM19</a>]</span> for
 more details.</p>
+<img alt="_images/KeyNet.png" src="_images/KeyNet.png" />
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -2187,7 +2297,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">keyn
 <dt class="sig sig-object py" id="kornia.feature.FilterResponseNorm2d">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">FilterResponseNorm2d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_bias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_eps_leanable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/hynet.html#FilterResponseNorm2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.FilterResponseNorm2d" title="Permalink to this definition">#</a></dt>
 <dd><p>Feature Response Normalization layer from ‘Filter Response Normalization Layer: Eliminating Batch Dependence
-in the Training of Deep Neural Networks’, see <span id="id14">[<a class="reference internal" href="community/bibliography.html#id8" title="Saurabh Singh and Shankar Krishnan. Filter response normalization layer: eliminating batch dependence in the training of deep neural networks. In CVPR. 2020.">SK20</a>]</span> for more details.</p>
+in the Training of Deep Neural Networks’, see <span id="id15">[<a class="reference internal" href="community/bibliography.html#id8" title="Saurabh Singh and Shankar Krishnan. Filter response normalization layer: eliminating batch dependence in the training of deep neural networks. In CVPR. 2020.">SK20</a>]</span> for more details.</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[y =  \gamma \times \frac{x}{\sqrt{\mathrm{E}[x^2]} + |\epsilon|} + \beta\]</div>
@@ -2227,7 +2337,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">Fals
 <dt class="sig sig-object py" id="kornia.feature.TLU">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">TLU</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_features</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/hynet.html#TLU"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.TLU" title="Permalink to this definition">#</a></dt>
 <dd><p>TLU layer from ‘Filter Response Normalization Layer: Eliminating Batch Dependence in the Training of Deep
-Neural Networks, see <span id="id15">[<a class="reference internal" href="community/bibliography.html#id8" title="Saurabh Singh and Shankar Krishnan. Filter response normalization layer: eliminating batch dependence in the training of deep neural networks. In CVPR. 2020.">SK20</a>]</span> for more details. <span class="math notranslate nohighlight">\({\tau}\)</span> is learnable per channel.</p>
+Neural Networks, see <span id="id16">[<a class="reference internal" href="community/bibliography.html#id8" title="Saurabh Singh and Shankar Krishnan. Filter response normalization layer: eliminating batch dependence in the training of deep neural networks. In CVPR. 2020.">SK20</a>]</span> for more details. <span class="math notranslate nohighlight">\({\tau}\)</span> is learnable per channel.</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[y = \max(x, {\tau})\]</div>
@@ -2255,7 +2365,7 @@ Neural Networks, see <span id="id15">[<a class="reference internal" href="commun
 <dd><p>Multi-scale feature detector, based on code from KeyNet. Can be used with any response function.</p>
 <p>This is based on the original code from paper
 “Key.Net: Keypoint Detection by Handcrafted and Learned CNN Filters”.
-See <span id="id16">[<a class="reference internal" href="community/bibliography.html#id22" title="Axel Barroso-Laguna, Edgar Riba, Daniel Ponsa, and Krystian Mikolajczyk. Key.Net: Keypoint Detection by Handcrafted and Learned CNN Filters. In ICCV. 2019.">BLRPM19</a>]</span> for more details.</p>
+See <span id="id17">[<a class="reference internal" href="community/bibliography.html#id22" title="Axel Barroso-Laguna, Edgar Riba, Daniel Ponsa, and Krystian Mikolajczyk. Key.Net: Keypoint Detection by Handcrafted and Learned CNN Filters. In ICCV. 2019.">BLRPM19</a>]</span> for more details.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -2379,7 +2489,8 @@ responses: shape [BxNx1]. Response function values for corresponding lafs</p>
 <dd><p>Multi-scale feature detector based on KeyNet.</p>
 <p>This is based on the original code from paper
 “Key.Net: Keypoint Detection by Handcrafted and Learned CNN Filters”.
-See <span id="id17">[<a class="reference internal" href="community/bibliography.html#id22" title="Axel Barroso-Laguna, Edgar Riba, Daniel Ponsa, and Krystian Mikolajczyk. Key.Net: Keypoint Detection by Handcrafted and Learned CNN Filters. In ICCV. 2019.">BLRPM19</a>]</span> for more details.</p>
+See <span id="id18">[<a class="reference internal" href="community/bibliography.html#id22" title="Axel Barroso-Laguna, Edgar Riba, Daniel Ponsa, and Krystian Mikolajczyk. Key.Net: Keypoint Detection by Handcrafted and Learned CNN Filters. In ICCV. 2019.">BLRPM19</a>]</span> for more details.</p>
+<img alt="_images/keynet.jpg" src="_images/keynet.jpg" />
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -2455,7 +2566,7 @@ responses: shape [1xNx1]. Response function values for corresponding lafs</p>
 <dt class="sig sig-object py" id="kornia.feature.PatchAffineShapeEstimator">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">PatchAffineShapeEstimator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">patch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">19</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/affine_shape.html#PatchAffineShapeEstimator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.PatchAffineShapeEstimator" title="Permalink to this definition">#</a></dt>
 <dd><p>Module, which estimates the second moment matrix of the patch gradients.</p>
-<p>The method determines the affine shape of the local feature as in <span id="id18">[<a class="reference internal" href="community/bibliography.html#id5" title="A. Baumberg. Reliable feature matching across widely separated views. In CVPR. 2000.">Baumberg00</a>]</span>.</p>
+<p>The method determines the affine shape of the local feature as in <span id="id19">[<a class="reference internal" href="community/bibliography.html#id5" title="A. Baumberg. Reliable feature matching across widely separated views. In CVPR. 2000.">Baumberg00</a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -2603,7 +2714,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">1e-0
 <dd><p>Network, which estimates the canonical orientation of the given 32x32 patches, in radians.</p>
 <p>Zero angle points towards right. This is based on the original code from paper
 “Repeatability Is Not Enough: Learning Discriminative Affine Regions via Discriminability””.
-See <span id="id19">[<a class="reference internal" href="community/bibliography.html#id13" title="D. Mishkin, F. Radenovic, and J. Matas. Repeatability is Not Enough: Learning Affine Regions via Discriminability. In ECCV. 2018.">MRM18</a>]</span> for more details.</p>
+See <span id="id20">[<a class="reference internal" href="community/bibliography.html#id13" title="D. Mishkin, F. Radenovic, and J. Matas. Repeatability is Not Enough: Learning Affine Regions via Discriminability. In ECCV. 2018.">MRM18</a>]</span> for more details.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -2654,7 +2765,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">1e-0
 <dd><p>Module, which extracts patches using input images and local affine frames (LAFs).</p>
 <p>Then runs AffNet on patches to estimate LAFs shape. This is based on the original code from paper
 “Repeatability Is Not Enough: Learning Discriminative Affine Regions via Discriminability””.
-See <span id="id20">[<a class="reference internal" href="community/bibliography.html#id13" title="D. Mishkin, F. Radenovic, and J. Matas. Repeatability is Not Enough: Learning Affine Regions via Discriminability. In ECCV. 2018.">MRM18</a>]</span> for more details.</p>
+See <span id="id21">[<a class="reference internal" href="community/bibliography.html#id13" title="D. Mishkin, F. Radenovic, and J. Matas. Repeatability is Not Enough: Learning Affine Regions via Discriminability. In ECCV. 2018.">MRM18</a>]</span> for more details.</p>
 <p>Then original LAF shape is replaced with estimated one. The original LAF orientation is not preserved,
 so it is recommended to first run LAFAffineShapeEstimator and then LAFOrienter.</p>
 <dl class="field-list simple">
@@ -2689,7 +2800,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">Fals
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">DeFMO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pretrained</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/defmo.html#DeFMO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.DeFMO" title="Permalink to this definition">#</a></dt>
 <dd><p>Module that disentangle a fast-moving object from the background and performs deblurring.</p>
 <dl class="simple">
-<dt>This is based on the original code from paper “DeFMO: Deblurring and Shape Recovery</dt><dd><p>of Fast Moving Objects”. See <span id="id21">[<a class="reference internal" href="community/bibliography.html#id3" title="Denys Rozumnyi, Martin R. Oswald, Vittorio Ferrari, Jiri Matas, and Marc Pollefeys. Defmo: deblurring and shape recovery of fast moving objects. In CVPR. 2021.">ROF+21</a>]</span> for more details.</p>
+<dt>This is based on the original code from paper “DeFMO: Deblurring and Shape Recovery</dt><dd><p>of Fast Moving Objects”. See <span id="id22">[<a class="reference internal" href="community/bibliography.html#id3" title="Denys Rozumnyi, Martin R. Oswald, Vittorio Ferrari, Jiri Matas, and Marc Pollefeys. Defmo: deblurring and shape recovery of fast moving objects. In CVPR. 2021.">ROF+21</a>]</span> for more details.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
@@ -2831,6 +2942,12 @@ registered hooks while the latter silently ignores them.</p>
 <li><a class="reference internal" href="#kornia.feature.match_adalam"><code class="docutils literal notranslate"><span class="pre">match_adalam()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.feature.DescriptorMatcher"><code class="docutils literal notranslate"><span class="pre">DescriptorMatcher</span></code></a><ul>
 <li><a class="reference internal" href="#kornia.feature.DescriptorMatcher.forward"><code class="docutils literal notranslate"><span class="pre">DescriptorMatcher.forward()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#kornia.feature.DISK"><code class="docutils literal notranslate"><span class="pre">DISK</span></code></a><ul>
+<li><a class="reference internal" href="#kornia.feature.DISK.forward"><code class="docutils literal notranslate"><span class="pre">DISK.forward()</span></code></a></li>
+<li><a class="reference internal" href="#kornia.feature.DISK.from_pretrained"><code class="docutils literal notranslate"><span class="pre">DISK.from_pretrained()</span></code></a></li>
+<li><a class="reference internal" href="#kornia.feature.DISK.heatmap_and_dense_descriptors"><code class="docutils literal notranslate"><span class="pre">DISK.heatmap_and_dense_descriptors()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#kornia.feature.GeometryAwareDescriptorMatcher"><code class="docutils literal notranslate"><span class="pre">GeometryAwareDescriptorMatcher</span></code></a><ul>
