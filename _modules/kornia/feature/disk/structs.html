@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" />
-        <link rel="canonical" href="https://kornia.readthedocs.io/_modules/kornia/feature/disk/disk.html" />
+        <link rel="canonical" href="https://kornia.readthedocs.io/_modules/kornia/feature/disk/structs.html" />
 
     <link rel="shortcut icon" href="../../../../_static/kornia_logo_favicon.png"/><!-- Generated with Sphinx 5.3.0 and Furo 2023.03.27 -->
-        <title>kornia.feature.disk.disk - Kornia</title>
+        <title>kornia.feature.disk.structs - Kornia</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
@@ -305,142 +305,87 @@
           </label>
         </div>
         <article role="main">
-          <h1>Source code for kornia.feature.disk.disk</h1><div class="highlight"><pre>
+          <h1>Source code for kornia.feature.disk.structs</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 
-<span class="kn">from</span> <span class="nn">kornia.core</span> <span class="kn">import</span> <span class="n">Module</span><span class="p">,</span> <span class="n">Tensor</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
 
-<span class="kn">from</span> <span class="nn">._unets</span> <span class="kn">import</span> <span class="n">Unet</span>
-<span class="kn">from</span> <span class="nn">.detector</span> <span class="kn">import</span> <span class="n">heatmap_to_keypoints</span>
-<span class="kn">from</span> <span class="nn">.structs</span> <span class="kn">import</span> <span class="n">DISKFeatures</span>
+<span class="kn">from</span> <span class="nn">kornia.core</span> <span class="kn">import</span> <span class="n">Tensor</span>
 
 
-<div class="viewcode-block" id="DISK"><a class="viewcode-back" href="../../../../feature.html#kornia.feature.DISK">[docs]</a><span class="k">class</span> <span class="nc">DISK</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Module which detects and described local features in an image using the DISK method. See</span>
-<span class="sd">    :cite:`tyszkiewicz2020disk` for details.</span>
-
-<span class="sd">    .. image:: _static/img/disk_outdoor_depth.jpg</span>
+<div class="viewcode-block" id="DISKFeatures"><a class="viewcode-back" href="../../../../feature.html#kornia.feature.DISKFeatures">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">DISKFeatures</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;A data structure holding DISK keypoints, descriptors and detection scores for an image. Since DISK detects a</span>
+<span class="sd">    varying number of keypoints per image, `DISKFeatures` is not batched.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        desc_dim: The dimension of the descriptor.</span>
-<span class="sd">        unet: The U-Net to use. If None, a default U-Net is used. Kornia doesn&#39;t provide the training code for DISK</span>
-<span class="sd">              so this is only useful when using a custom checkpoint trained using the code released with the paper.</span>
-<span class="sd">              The unet should take as input a tensor of shape :math:`(B, C, H, W)` and output a tensor of shape</span>
-<span class="sd">              :math:`(B, \mathrm{desc\_dim} + 1, H, W)`.</span>
+<span class="sd">        keypoints: Tensor of shape :math:`(N, 2)`, where :math:`N` is the number of keypoints.</span>
+<span class="sd">        descriptors: Tensor of shape :math:`(N, D)`, where :math:`D` is the descriptor dimension.</span>
+<span class="sd">        detection_scores: Tensor of shape :math:`(N,)` where the detection score can be interpreted as</span>
+<span class="sd">                          the log-probability of keeping a keypoint after it has been proposed (see the paper</span>
+<span class="sd">                          section *Method → Feature distribution* for details).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">keypoints</span><span class="p">:</span> <span class="n">Tensor</span>
+    <span class="n">descriptors</span><span class="p">:</span> <span class="n">Tensor</span>
+    <span class="n">detection_scores</span><span class="p">:</span> <span class="n">Tensor</span>
 
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; disk = DISK.from_pretrained(&#39;depth&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; images = torch.rand(1, 3, 256, 256)</span>
-<span class="sd">        &gt;&gt;&gt; features = disk(images)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">n</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">keypoints</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">device</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">keypoints</span><span class="o">.</span><span class="n">device</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">x</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Accesses the x coordinates of keypoints (along image width).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">keypoints</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">y</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Accesses the y coordinates of keypoints (along image height).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">keypoints</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+<div class="viewcode-block" id="DISKFeatures.to"><a class="viewcode-back" href="../../../../feature.html#kornia.feature.DISKFeatures.to">[docs]</a>    <span class="k">def</span> <span class="nf">to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DISKFeatures</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calls :func:`torch.Tensor.to` on each tensor to move the keypoints, descriptors and detection scores to</span>
+<span class="sd">        the specified device and/or data type.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            *args: Arguments passed to :func:`torch.Tensor.to`.</span>
+<span class="sd">            **kwargs: Keyword arguments passed to :func:`torch.Tensor.to`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A new DISKFeatures object with tensors of appropriate type and location.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">DISKFeatures</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">keypoints</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">descriptors</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">detection_scores</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="p">)</span></div></div>
+
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Keypoints</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A temporary struct used to store keypoint detections and their log-probabilities.</span>
+
+<span class="sd">    After construction, merge_with_descriptors is used to select corresponding descriptors from unet output.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">desc_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">unet</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+    <span class="n">xys</span><span class="p">:</span> <span class="n">Tensor</span>
+    <span class="n">detection_logp</span><span class="p">:</span> <span class="n">Tensor</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">desc_dim</span> <span class="o">=</span> <span class="n">desc_dim</span>
+    <span class="k">def</span> <span class="nf">merge_with_descriptors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">descriptors</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DISKFeatures</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Select descriptors from a dense `descriptors` tensor, at locations given by `self.xys`&quot;&quot;&quot;</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="n">descriptors</span><span class="o">.</span><span class="n">dtype</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xys</span><span class="o">.</span><span class="n">T</span>
 
-        <span class="k">if</span> <span class="n">unet</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">unet</span> <span class="o">=</span> <span class="n">Unet</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">down</span><span class="o">=</span><span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">],</span> <span class="n">up</span><span class="o">=</span><span class="p">[</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">desc_dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">unet</span> <span class="o">=</span> <span class="n">unet</span>
+        <span class="n">desc</span> <span class="o">=</span> <span class="n">descriptors</span><span class="p">[:,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">desc</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DISK.heatmap_and_dense_descriptors"><a class="viewcode-back" href="../../../../feature.html#kornia.feature.DISK.heatmap_and_dense_descriptors">[docs]</a>    <span class="k">def</span> <span class="nf">heatmap_and_dense_descriptors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">images</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the heatmap and the dense descriptors.</span>
-
-<span class="sd">        .. image:: _static/img/DISK.png</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            images: The image to detect features in. Shape :math:`(B, 3, H, W)`.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            A tuple of dense detection scores and descriptors.</span>
-<span class="sd">            Shapes are :math:`(B, 1, H, W)` and :math:`(B, D, H, W)`, where</span>
-<span class="sd">            :math:`D` is the descriptor dimension.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">unet_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unet</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">unet_output</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">desc_dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s1">&#39;U-Net output has </span><span class="si">{</span><span class="n">unet_output</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> channels, but expected self.desc_dim=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">desc_dim</span><span class="si">}</span><span class="s1"> + 1.&#39;</span>
-            <span class="p">)</span>
-
-        <span class="n">descriptors</span> <span class="o">=</span> <span class="n">unet_output</span><span class="p">[:,</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">desc_dim</span><span class="p">]</span>
-        <span class="n">heatmaps</span> <span class="o">=</span> <span class="n">unet_output</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">desc_dim</span> <span class="p">:]</span>
-
-        <span class="k">return</span> <span class="n">heatmaps</span><span class="p">,</span> <span class="n">descriptors</span></div>
-
-<div class="viewcode-block" id="DISK.forward"><a class="viewcode-back" href="../../../../feature.html#kornia.feature.DISK.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">images</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span>
-        <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">window_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
-        <span class="n">score_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
-        <span class="n">pad_if_not_divisible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">DISKFeatures</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Detects features in an image, returning keypoint locations, descriptors and detection scores.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            images: The image to detect features in. Shape :math:`(B, 3, H, W)`.</span>
-<span class="sd">            n: The maximum number of keypoints to detect. If None, all keypoints are returned.</span>
-<span class="sd">            window_size: The size of the non-maxima suppression window used to filter detections.</span>
-<span class="sd">            score_threshold: The minimum score a detection must have to be returned.</span>
-<span class="sd">                             See :py:class:`DISKFeatures` for details.</span>
-<span class="sd">            pad_if_not_divisible: if True, the non-16 divisible input is zero-padded to the closest 16-multiply</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            A list of length :math:`B` containing the detected features.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">B</span> <span class="o">=</span> <span class="n">images</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">pad_if_not_divisible</span><span class="p">:</span>
-            <span class="n">h</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">images</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
-            <span class="n">pd_h</span> <span class="o">=</span> <span class="mi">16</span> <span class="o">-</span> <span class="n">h</span> <span class="o">%</span> <span class="mi">16</span> <span class="k">if</span> <span class="n">h</span> <span class="o">%</span> <span class="mi">16</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
-            <span class="n">pd_w</span> <span class="o">=</span> <span class="mi">16</span> <span class="o">-</span> <span class="n">w</span> <span class="o">%</span> <span class="mi">16</span> <span class="k">if</span> <span class="n">w</span> <span class="o">%</span> <span class="mi">16</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
-            <span class="n">images</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pd_w</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pd_h</span><span class="p">),</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
-
-        <span class="n">heatmaps</span><span class="p">,</span> <span class="n">descriptors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heatmap_and_dense_descriptors</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">pad_if_not_divisible</span><span class="p">:</span>
-            <span class="n">heatmaps</span> <span class="o">=</span> <span class="n">heatmaps</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="n">h</span><span class="p">,</span> <span class="p">:</span><span class="n">w</span><span class="p">]</span>
-            <span class="n">descriptors</span> <span class="o">=</span> <span class="n">descriptors</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="n">h</span><span class="p">,</span> <span class="p">:</span><span class="n">w</span><span class="p">]</span>
-
-        <span class="n">keypoints</span> <span class="o">=</span> <span class="n">heatmap_to_keypoints</span><span class="p">(</span><span class="n">heatmaps</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="n">window_size</span><span class="p">,</span> <span class="n">score_threshold</span><span class="o">=</span><span class="n">score_threshold</span><span class="p">)</span>
-
-        <span class="n">features</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">B</span><span class="p">):</span>
-            <span class="n">features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">keypoints</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">merge_with_descriptors</span><span class="p">(</span><span class="n">descriptors</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
-
-        <span class="k">return</span> <span class="n">features</span></div>
-
-<div class="viewcode-block" id="DISK.from_pretrained"><a class="viewcode-back" href="../../../../feature.html#kornia.feature.DISK.from_pretrained">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_pretrained</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">checkpoint</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;depth&#39;</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cpu&#39;</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="n">DISK</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Loads a pretrained model.</span>
-
-<span class="sd">        Depth model was trained using depth map supervision and is slightly more precise but biased to detect keypoints</span>
-<span class="sd">        only where SfM depth is available. Epipolar model was trained using epipolar geometry supervision and</span>
-<span class="sd">        is less precise but detects keypoints everywhere where they are matchable. The difference is especially</span>
-<span class="sd">        pronounced on thin structures and on edges of objects.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            checkpoint: The checkpoint to load. One of &#39;depth&#39; or &#39;epipolar&#39;.</span>
-<span class="sd">            device: The device to load the model to.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            The pretrained model.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">urls</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;depth&#39;</span><span class="p">:</span> <span class="s1">&#39;https://raw.githubusercontent.com/cvlab-epfl/disk/master/depth-save.pth&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;epipolar&#39;</span><span class="p">:</span> <span class="s1">&#39;https://raw.githubusercontent.com/cvlab-epfl/disk/master/epipolar-save.pth&#39;</span><span class="p">,</span>
-        <span class="p">}</span>
-
-        <span class="k">if</span> <span class="n">checkpoint</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unknown pretrained model: </span><span class="si">{</span><span class="n">checkpoint</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-
-        <span class="n">pretrained_dict</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">hub</span><span class="o">.</span><span class="n">load_state_dict_from_url</span><span class="p">(</span><span class="n">urls</span><span class="p">[</span><span class="n">checkpoint</span><span class="p">],</span> <span class="n">map_location</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
-
-        <span class="n">model</span><span class="p">:</span> <span class="n">DISK</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-        <span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">pretrained_dict</span><span class="p">[</span><span class="s1">&#39;extractor&#39;</span><span class="p">])</span>
-        <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">model</span></div></div>
+        <span class="k">return</span> <span class="n">DISKFeatures</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xys</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">dtype</span><span class="p">),</span> <span class="n">desc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">detection_logp</span><span class="p">)</span>
 </pre></div>
         </article>
       </div>

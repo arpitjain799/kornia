@@ -1305,14 +1305,14 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">None
 <li><p><strong>window_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – The size of the non-maxima suppression window used to filter detections.
 Default:  <code class="code docutils literal notranslate"><span class="pre">5</span></code></p></li>
 <li><p><strong>score_threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – The minimum score a detection must have to be returned.
-See <code class="xref py py-class docutils literal notranslate"><span class="pre">DISKFeatures</span></code> for details.
+See <a class="reference internal" href="#kornia.feature.DISKFeatures" title="kornia.feature.DISKFeatures"><code class="xref py py-class docutils literal notranslate"><span class="pre">DISKFeatures</span></code></a> for details.
 Default:  <code class="code docutils literal notranslate"><span class="pre">0.0</span></code></p></li>
-<li><p><strong>pad_if_not_divisible</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – if True, the non-32 divisible input is zero-padded to the closes 32-multiply
+<li><p><strong>pad_if_not_divisible</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – if True, the non-16 divisible input is zero-padded to the closest 16-multiply
 Default:  <code class="code docutils literal notranslate"><span class="pre">False</span></code></p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[DISKFeatures]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference internal" href="#kornia.feature.DISKFeatures" title="kornia.feature.DISKFeatures">DISKFeatures</a>]</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>A list of length <span class="math notranslate nohighlight">\(B\)</span> containing the detected features.</p>
@@ -1356,13 +1356,62 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">torc
 <dd class="field-odd"><p><strong>images</strong> – The image to detect features in. Shape <span class="math notranslate nohighlight">\((B, 3, H, W)\)</span>.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Heatmap. Shape <span class="math notranslate nohighlight">\((B, 1, H, W)\)</span>.
-descriptors: Heatmap. Shape <span class="math notranslate nohighlight">\((B, descdim, H, W)\)</span>.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>response</p>
+<dd class="field-even"><p>A tuple of dense detection scores and descriptors.
+Shapes are <span class="math notranslate nohighlight">\((B, 1, H, W)\)</span> and <span class="math notranslate nohighlight">\((B, D, H, W)\)</span>, where
+<span class="math notranslate nohighlight">\(D\)</span> is the descriptor dimension.</p>
 </dd>
 </dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="kornia.feature.DISKFeatures">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.feature.</span></span><span class="sig-name descname"><span class="pre">DISKFeatures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keypoints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">descriptors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection_scores</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/disk/structs.html#DISKFeatures"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.DISKFeatures" title="Permalink to this definition">#</a></dt>
+<dd><p>A data structure holding DISK keypoints, descriptors and detection scores for an image. Since DISK detects a
+varying number of keypoints per image, <cite>DISKFeatures</cite> is not batched.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>keypoints</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a>) – Tensor of shape <span class="math notranslate nohighlight">\((N, 2)\)</span>, where <span class="math notranslate nohighlight">\(N\)</span> is the number of keypoints.</p></li>
+<li><p><strong>descriptors</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a>) – Tensor of shape <span class="math notranslate nohighlight">\((N, D)\)</span>, where <span class="math notranslate nohighlight">\(D\)</span> is the descriptor dimension.</p></li>
+<li><p><strong>detection_scores</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></a>) – Tensor of shape <span class="math notranslate nohighlight">\((N,)\)</span> where the detection score can be interpreted as
+the log-probability of keeping a keypoint after it has been proposed (see the paper
+section <em>Method → Feature distribution</em> for details).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="kornia.feature.DISKFeatures.to">
+<span class="sig-name descname"><span class="pre">to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/feature/disk/structs.html#DISKFeatures.to"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.feature.DISKFeatures.to" title="Permalink to this definition">#</a></dt>
+<dd><p>Calls <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.Tensor.to()</span></code> on each tensor to move the keypoints, descriptors and detection scores to
+the specified device and/or data type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*args</strong> – Arguments passed to <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.Tensor.to()</span></code>.</p></li>
+<li><p><strong>**kwargs</strong> – Keyword arguments passed to <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.Tensor.to()</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#kornia.feature.DISKFeatures" title="kornia.feature.disk.structs.DISKFeatures"><code class="xref py py-class docutils literal notranslate"><span class="pre">DISKFeatures</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A new DISKFeatures object with tensors of appropriate type and location.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="kornia.feature.DISKFeatures.x">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">x</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v2.0)"><span class="pre">Tensor</span></a></em><a class="headerlink" href="#kornia.feature.DISKFeatures.x" title="Permalink to this definition">#</a></dt>
+<dd><p>Accesses the x coordinates of keypoints (along image width).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="kornia.feature.DISKFeatures.y">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">y</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v2.0)"><span class="pre">Tensor</span></a></em><a class="headerlink" href="#kornia.feature.DISKFeatures.y" title="Permalink to this definition">#</a></dt>
+<dd><p>Accesses the y coordinates of keypoints (along image height).</p>
 </dd></dl>
 
 </dd></dl>
@@ -2948,6 +2997,12 @@ registered hooks while the latter silently ignores them.</p>
 <li><a class="reference internal" href="#kornia.feature.DISK.forward"><code class="docutils literal notranslate"><span class="pre">DISK.forward()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.feature.DISK.from_pretrained"><code class="docutils literal notranslate"><span class="pre">DISK.from_pretrained()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.feature.DISK.heatmap_and_dense_descriptors"><code class="docutils literal notranslate"><span class="pre">DISK.heatmap_and_dense_descriptors()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#kornia.feature.DISKFeatures"><code class="docutils literal notranslate"><span class="pre">DISKFeatures</span></code></a><ul>
+<li><a class="reference internal" href="#kornia.feature.DISKFeatures.to"><code class="docutils literal notranslate"><span class="pre">DISKFeatures.to()</span></code></a></li>
+<li><a class="reference internal" href="#kornia.feature.DISKFeatures.x"><code class="docutils literal notranslate"><span class="pre">DISKFeatures.x</span></code></a></li>
+<li><a class="reference internal" href="#kornia.feature.DISKFeatures.y"><code class="docutils literal notranslate"><span class="pre">DISKFeatures.y</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#kornia.feature.GeometryAwareDescriptorMatcher"><code class="docutils literal notranslate"><span class="pre">GeometryAwareDescriptorMatcher</span></code></a><ul>
