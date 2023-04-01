@@ -309,6 +309,7 @@
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
 
 <span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
 
@@ -349,7 +350,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Accesses the y coordinates of keypoints (along image height).&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">keypoints</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
 
-<div class="viewcode-block" id="DISKFeatures.to"><a class="viewcode-back" href="../../../../feature.html#kornia.feature.DISKFeatures.to">[docs]</a>    <span class="k">def</span> <span class="nf">to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DISKFeatures</span><span class="p">:</span>
+<div class="viewcode-block" id="DISKFeatures.to"><a class="viewcode-back" href="../../../../feature.html#kornia.feature.DISKFeatures.to">[docs]</a>    <span class="k">def</span> <span class="nf">to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DISKFeatures</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calls :func:`torch.Tensor.to` on each tensor to move the keypoints, descriptors and detection scores to</span>
 <span class="sd">        the specified device and/or data type.</span>
 
