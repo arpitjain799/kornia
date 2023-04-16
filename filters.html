@@ -495,6 +495,40 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">True
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="kornia.filters.guided_blur">
+<span class="sig-prename descclassname"><span class="pre">kornia.filters.</span></span><span class="sig-name descname"><span class="pre">guided_blur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">guidance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">border_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'reflect'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subsample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/filters/guided.html#guided_blur"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.filters.guided_blur" title="Permalink to this definition">#</a></dt>
+<dd><p>Blur a tensor using a Guided filter.</p>
+<img alt="_images/guided_blur.png" src="_images/guided_blur.png" />
+<p>The operator is an edge-preserving image smoothing filter. See <span id="id2">[<a class="reference internal" href="community/bibliography.html#id39" title="Kaiming He, Jian Sun, and Xiaoou Tang. Guided image filtering. In Proceedings of the 11th European Conference on Computer Vision: Part I, 1-14. 2010.">HST10</a>]</span>
+and <span id="id3">[<a class="reference internal" href="community/bibliography.html#id40" title="Kaiming He and Jian Sun. Fast guided filter. 2015. arXiv:1505.00996.">HS15</a>]</span> for details. Guidance and input can have different number of channels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>guidance</strong> – the guidance tensor with shape <span class="math notranslate nohighlight">\((B,C,H,W)\)</span>.</p></li>
+<li><p><strong>input</strong> – the input tensor with shape <span class="math notranslate nohighlight">\((B,C,H,W)\)</span>.</p></li>
+<li><p><strong>kernel_size</strong> – the size of the kernel.</p></li>
+<li><p><strong>eps</strong> – regularization parameter. Smaller values preserve more edges.</p></li>
+<li><p><strong>border_type</strong> (<em>optional</em>) – the padding mode to be applied before convolving.
+The expected modes are: <code class="docutils literal notranslate"><span class="pre">'constant'</span></code>, <code class="docutils literal notranslate"><span class="pre">'reflect'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'replicate'</span></code> or <code class="docutils literal notranslate"><span class="pre">'circular'</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">'reflect'</span></code>.</p></li>
+<li><p><strong>subsample</strong> (<em>optional</em>) – subsampling factor for Fast Guided filtering. Default: 1 (no subsampling)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the blurred tensor with same shape as <cite>input</cite> <span class="math notranslate nohighlight">\((B, C, H, W)\)</span>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">guidance</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">guided_blur</span><span class="p">(</span><span class="n">guidance</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">torch.Size([2, 4, 5, 5])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="kornia.filters.joint_bilateral_blur">
 <span class="sig-prename descclassname"><span class="pre">kornia.filters.</span></span><span class="sig-name descname"><span class="pre">joint_bilateral_blur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guidance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_color</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">border_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'reflect'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_distance_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'l1'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/filters/bilateral.html#joint_bilateral_blur"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.filters.joint_bilateral_blur" title="Permalink to this definition">#</a></dt>
 <dd><p>Blur a tensor using a Joint Bilateral filter.</p>
@@ -1046,7 +1080,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">1</s
 <dl class="py class">
 <dt class="sig sig-object py" id="kornia.filters.DexiNed">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.filters.</span></span><span class="sig-name descname"><span class="pre">DexiNed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pretrained</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/filters/dexined.html#DexiNed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.filters.DexiNed" title="Permalink to this definition">#</a></dt>
-<dd><p>Definition of the DXtrem network from <span id="id2">[<a class="reference internal" href="community/bibliography.html#id24" title="X. Soria, E. Riba, and A. Sappa. Dense extreme inception network: towards a robust cnn model for edge detection. In 2020 IEEE Winter Conference on Applications of Computer Vision (WACV), volume, 1912-1921. Los Alamitos, CA, USA, mar 2020. IEEE Computer Society. URL: https://doi.ieeecomputersociety.org/10.1109/WACV45572.2020.9093290, doi:10.1109/WACV45572.2020.9093290.">SRS20</a>]</span>.</p>
+<dd><p>Definition of the DXtrem network from <span id="id4">[<a class="reference internal" href="community/bibliography.html#id24" title="X. Soria, E. Riba, and A. Sappa. Dense extreme inception network: towards a robust cnn model for edge detection. In 2020 IEEE Winter Conference on Applications of Computer Vision (WACV), volume, 1912-1921. Los Alamitos, CA, USA, mar 2020. IEEE Computer Society. URL: https://doi.ieeecomputersociety.org/10.1109/WACV45572.2020.9093290, doi:10.1109/WACV45572.2020.9093290.">SRS20</a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>A list of tensor with the intermediate features which the last element
@@ -1063,8 +1097,8 @@ is the edges map with shape <span class="math notranslate nohighlight">\((B,1,H,
 </div>
 </dd></dl>
 
-<section id="id3">
-<h3>Interactive Demo<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<section id="id5">
+<h3>Interactive Demo<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
 <gradio-app space="kornia/edge_detector"></gradio-app><p>Visit the <a class="reference external" href="https://huggingface.co/spaces/kornia/edge_detector">Kornia edge detector demo on the Hugging Face Spaces</a>.</p>
 </section>
 </section>
@@ -1642,7 +1676,7 @@ Default: <code class="docutils literal notranslate"><span class="pre">'l1'</span
 <dt class="sig sig-object py" id="kornia.filters.BlurPool2D">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.filters.</span></span><span class="sig-name descname"><span class="pre">BlurPool2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stride</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/filters/blur_pool.html#BlurPool2D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.filters.BlurPool2D" title="Permalink to this definition">#</a></dt>
 <dd><p>Compute blur (anti-aliasing) and downsample a given feature map.</p>
-<p>See <span id="id4">[<a class="reference internal" href="community/bibliography.html#id4" title="Richard Zhang. Making convolutional networks shift-invariant again. In ICML. 2019.">Zha19</a>]</span> for more details.</p>
+<p>See <span id="id6">[<a class="reference internal" href="community/bibliography.html#id4" title="Richard Zhang. Making convolutional networks shift-invariant again. In ICML. 2019.">Zha19</a>]</span> for more details.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1734,7 +1768,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">True
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.filters.</span></span><span class="sig-name descname"><span class="pre">MaxBlurPool2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stride</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_pool_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ceil_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/filters/blur_pool.html#MaxBlurPool2D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.filters.MaxBlurPool2D" title="Permalink to this definition">#</a></dt>
 <dd><p>Compute pools and blurs and downsample a given feature map.</p>
 <p>Equivalent to <code class="docutils literal notranslate"><span class="pre">`nn.Sequential(nn.MaxPool2d(...),</span> <span class="pre">BlurPool2D(...))`</span></code></p>
-<p>See <span id="id5">[<a class="reference internal" href="community/bibliography.html#id4" title="Richard Zhang. Making convolutional networks shift-invariant again. In ICML. 2019.">Zha19</a>]</span> for more details.</p>
+<p>See <span id="id7">[<a class="reference internal" href="community/bibliography.html#id4" title="Richard Zhang. Making convolutional networks shift-invariant again. In ICML. 2019.">Zha19</a>]</span> for more details.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1841,6 +1875,45 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">True
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gauss</span> <span class="o">=</span> <span class="n">GaussianBlur2d</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">gauss</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>  <span class="c1"># 2x4x5x5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">torch.Size([2, 4, 5, 5])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="kornia.filters.GuidedBlur">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.filters.</span></span><span class="sig-name descname"><span class="pre">GuidedBlur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">border_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'reflect'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subsample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/filters/guided.html#GuidedBlur"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.filters.GuidedBlur" title="Permalink to this definition">#</a></dt>
+<dd><p>Blur a tensor using a Guided filter.</p>
+<p>The operator is an edge-preserving image smoothing filter. See <span id="id8">[<a class="reference internal" href="community/bibliography.html#id39" title="Kaiming He, Jian Sun, and Xiaoou Tang. Guided image filtering. In Proceedings of the 11th European Conference on Computer Vision: Part I, 1-14. 2010.">HST10</a>]</span>
+and <span id="id9">[<a class="reference internal" href="community/bibliography.html#id40" title="Kaiming He and Jian Sun. Fast guided filter. 2015. arXiv:1505.00996.">HS15</a>]</span> for details. Guidance and input can have different number of channels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kernel_size</strong> – the size of the kernel.</p></li>
+<li><p><strong>eps</strong> – regularization parameter. Smaller values preserve more edges.</p></li>
+<li><p><strong>border_type</strong> (<em>optional</em>) – the padding mode to be applied before convolving.
+The expected modes are: <code class="docutils literal notranslate"><span class="pre">'constant'</span></code>, <code class="docutils literal notranslate"><span class="pre">'reflect'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'replicate'</span></code> or <code class="docutils literal notranslate"><span class="pre">'circular'</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">'reflect'</span></code>.</p></li>
+<li><p><strong>subsample</strong> (<em>optional</em>) – subsampling factor for Fast Guided filtering. Default: 1 (no subsampling)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the blurred input tensor.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Shape:</dt><dd><ul class="simple">
+<li><p>Input: <span class="math notranslate nohighlight">\((B, C, H, W)\)</span>, <span class="math notranslate nohighlight">\((B, C, H, W)\)</span></p></li>
+<li><p>Output: <span class="math notranslate nohighlight">\((B, C, H, W)\)</span></p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">guidance</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blur</span> <span class="o">=</span> <span class="n">GuidedBlur</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">blur</span><span class="p">(</span><span class="n">guidance</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">output</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">torch.Size([2, 4, 5, 5])</span>
 </pre></div>
@@ -2036,6 +2109,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">'ref
 <li><a class="reference internal" href="#kornia.filters.blur_pool2d"><code class="docutils literal notranslate"><span class="pre">blur_pool2d()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.filters.box_blur"><code class="docutils literal notranslate"><span class="pre">box_blur()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.filters.gaussian_blur2d"><code class="docutils literal notranslate"><span class="pre">gaussian_blur2d()</span></code></a></li>
+<li><a class="reference internal" href="#kornia.filters.guided_blur"><code class="docutils literal notranslate"><span class="pre">guided_blur()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.filters.joint_bilateral_blur"><code class="docutils literal notranslate"><span class="pre">joint_bilateral_blur()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.filters.max_blur_pool2d"><code class="docutils literal notranslate"><span class="pre">max_blur_pool2d()</span></code></a></li>
 <li><a class="reference internal" href="#kornia.filters.median_blur"><code class="docutils literal notranslate"><span class="pre">median_blur()</span></code></a></li>
@@ -2056,7 +2130,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">'ref
 <li><a class="reference internal" href="#kornia.filters.SpatialGradient"><code class="docutils literal notranslate"><span class="pre">SpatialGradient</span></code></a></li>
 <li><a class="reference internal" href="#kornia.filters.SpatialGradient3d"><code class="docutils literal notranslate"><span class="pre">SpatialGradient3d</span></code></a></li>
 <li><a class="reference internal" href="#kornia.filters.DexiNed"><code class="docutils literal notranslate"><span class="pre">DexiNed</span></code></a></li>
-<li><a class="reference internal" href="#id3">Interactive Demo</a></li>
+<li><a class="reference internal" href="#id5">Interactive Demo</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#filtering-api">Filtering API</a><ul>
@@ -2084,6 +2158,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">'ref
 <li><a class="reference internal" href="#kornia.filters.MaxBlurPool2D"><code class="docutils literal notranslate"><span class="pre">MaxBlurPool2D</span></code></a></li>
 <li><a class="reference internal" href="#kornia.filters.MedianBlur"><code class="docutils literal notranslate"><span class="pre">MedianBlur</span></code></a></li>
 <li><a class="reference internal" href="#kornia.filters.GaussianBlur2d"><code class="docutils literal notranslate"><span class="pre">GaussianBlur2d</span></code></a></li>
+<li><a class="reference internal" href="#kornia.filters.GuidedBlur"><code class="docutils literal notranslate"><span class="pre">GuidedBlur</span></code></a></li>
 <li><a class="reference internal" href="#kornia.filters.JointBilateralBlur"><code class="docutils literal notranslate"><span class="pre">JointBilateralBlur</span></code></a></li>
 <li><a class="reference internal" href="#kornia.filters.MotionBlur"><code class="docutils literal notranslate"><span class="pre">MotionBlur</span></code></a></li>
 <li><a class="reference internal" href="#kornia.filters.UnsharpMask"><code class="docutils literal notranslate"><span class="pre">UnsharpMask</span></code></a></li>
