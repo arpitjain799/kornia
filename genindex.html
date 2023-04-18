@@ -225,6 +225,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="geometry.html">kornia.geometry</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="geometry.bbox.html">kornia.geometry.bbox</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.boxes.html">kornia.geometry.boxes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.keypoints.html">kornia.geometry.keypoints</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geometry.calibration.html">kornia.geometry.calibration</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="geometry.camera.html">kornia.geometry.camera</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="geometry.camera.pinhole.html">Pinhole Camera</a></li>
@@ -596,7 +597,13 @@
         <li><a href="contrib.html#kornia.contrib.ClassificationHead">ClassificationHead (class in kornia.contrib)</a>
 </li>
         <li><a href="geometry.camera.pinhole.html#kornia.geometry.camera.pinhole.PinholeCamera.clone">clone() (kornia.geometry.camera.pinhole.PinholeCamera method)</a>
+
+        <ul>
+          <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints.clone">(kornia.geometry.keypoints.Keypoints method)</a>
 </li>
+          <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints3D.clone">(kornia.geometry.keypoints.Keypoints3D method)</a>
+</li>
+        </ul></li>
         <li><a href="morphology.html#kornia.morphology.closing">closing() (in module kornia.morphology)</a>
 </li>
         <li><a href="geometry.quaternion.html#kornia.geometry.quaternion.Quaternion.coeffs">coeffs (kornia.geometry.quaternion.Quaternion property)</a>
@@ -613,10 +620,10 @@
 </li>
         <li><a href="geometry.linalg.html#kornia.geometry.linalg.compose_transformations">compose_transformations() (in module kornia.geometry.linalg)</a>
 </li>
-        <li><a href="geometry.boxes.html#kornia.geometry.boxes.Boxes.compute_area">compute_area() (kornia.geometry.boxes.Boxes method)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="geometry.boxes.html#kornia.geometry.boxes.Boxes.compute_area">compute_area() (kornia.geometry.boxes.Boxes method)</a>
+</li>
         <li><a href="geometry.epipolar.html#kornia.geometry.epipolar.compute_correspond_epilines">compute_correspond_epilines() (in module kornia.geometry.epipolar)</a>
 </li>
         <li><a href="augmentation.base.html#kornia.augmentation.GeometricAugmentationBase2D.compute_inverse_transformation">compute_inverse_transformation() (kornia.augmentation.GeometricAugmentationBase2D method)</a>
@@ -685,8 +692,14 @@
   <h2>D</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="geometry.quaternion.html#kornia.geometry.quaternion.Quaternion.data">data (kornia.geometry.quaternion.Quaternion property)</a>
+        <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints.data">data (kornia.geometry.keypoints.Keypoints property)</a>
+
+        <ul>
+          <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints3D.data">(kornia.geometry.keypoints.Keypoints3D property)</a>
 </li>
+          <li><a href="geometry.quaternion.html#kornia.geometry.quaternion.Quaternion.data">(kornia.geometry.quaternion.Quaternion property)</a>
+</li>
+        </ul></li>
         <li><a href="geometry.epipolar.html#kornia.geometry.epipolar.decompose_essential_matrix">decompose_essential_matrix() (in module kornia.geometry.epipolar)</a>
 </li>
         <li><a href="feature.html#kornia.feature.DeFMO">DeFMO (class in kornia.feature)</a>
@@ -726,11 +739,13 @@
         <ul>
           <li><a href="geometry.boxes.html#kornia.geometry.boxes.Boxes3D.device">(kornia.geometry.boxes.Boxes3D property)</a>
 </li>
-        </ul></li>
-        <li><a href="geometry.camera.pinhole.html#kornia.geometry.camera.pinhole.PinholeCamera.device">device() (kornia.geometry.camera.pinhole.PinholeCamera method)</a>
+          <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints.device">(kornia.geometry.keypoints.Keypoints property)</a>
 </li>
+        </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="geometry.camera.pinhole.html#kornia.geometry.camera.pinhole.PinholeCamera.device">device() (kornia.geometry.camera.pinhole.PinholeCamera method)</a>
+</li>
         <li><a href="filters.html#kornia.filters.DexiNed">DexiNed (class in kornia.filters)</a>
 </li>
         <li><a href="contrib.html#kornia.contrib.diamond_square">diamond_square() (in module kornia.contrib)</a>
@@ -771,6 +786,8 @@
 
         <ul>
           <li><a href="geometry.boxes.html#kornia.geometry.boxes.Boxes3D.dtype">(kornia.geometry.boxes.Boxes3D property)</a>
+</li>
+          <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints.dtype">(kornia.geometry.keypoints.Keypoints property)</a>
 </li>
         </ul></li>
     </ul></td>
@@ -987,6 +1004,10 @@
 
         <ul>
           <li><a href="geometry.boxes.html#kornia.geometry.boxes.Boxes3D.from_tensor">(kornia.geometry.boxes.Boxes3D class method)</a>
+</li>
+          <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints.from_tensor">(kornia.geometry.keypoints.Keypoints class method)</a>
+</li>
+          <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints3D.from_tensor">(kornia.geometry.keypoints.Keypoints3D class method)</a>
 </li>
         </ul></li>
         <li><a href="geometry.epipolar.html#kornia.geometry.epipolar.fundamental_from_essential">fundamental_from_essential() (in module kornia.geometry.epipolar)</a>
@@ -1215,6 +1236,8 @@
 </li>
         <li><a href="contrib.html#kornia.contrib.ImageStitcher">ImageStitcher (class in kornia.contrib)</a>
 </li>
+        <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints.index_put">index_put() (kornia.geometry.keypoints.Keypoints method)</a>
+</li>
         <li><a href="geometry.bbox.html#kornia.geometry.bbox.infer_bbox_shape">infer_bbox_shape() (in module kornia.geometry.bbox)</a>
 </li>
         <li><a href="geometry.bbox.html#kornia.geometry.bbox.infer_bbox_shape3d">infer_bbox_shape3d() (in module kornia.geometry.bbox)</a>
@@ -1301,6 +1324,10 @@
 </li>
         <li><a href="feature.html#kornia.feature.KeyNetHardNet">KeyNetHardNet (class in kornia.feature)</a>
 </li>
+        <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints">Keypoints (class in kornia.geometry.keypoints)</a>
+</li>
+        <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints3D">Keypoints3D (class in kornia.geometry.keypoints)</a>
+</li>
         <li><a href="losses.html#kornia.losses.kl_div_loss_2d">kl_div_loss_2d() (in module kornia.losses)</a>
 </li>
         <li>
@@ -1310,6 +1337,8 @@
           <li><a href="geometry.bbox.html#module-kornia.geometry.bbox">module</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li>
     kornia.geometry.boxes
 
@@ -1317,8 +1346,6 @@
           <li><a href="geometry.boxes.html#module-kornia.geometry.boxes">module</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li>
     kornia.geometry.homography
 
@@ -1604,7 +1631,13 @@
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="geometry.boxes.html#kornia.geometry.boxes.Boxes.pad">pad() (kornia.geometry.boxes.Boxes method)</a>
+
+        <ul>
+          <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints.pad">(kornia.geometry.keypoints.Keypoints method)</a>
 </li>
+          <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints3D.pad">(kornia.geometry.keypoints.Keypoints3D method)</a>
+</li>
+        </ul></li>
         <li><a href="augmentation.module.html#kornia.augmentation.PadTo">PadTo (class in kornia.augmentation)</a>
 </li>
         <li><a href="geometry.line.html#kornia.geometry.line.ParametrizedLine">ParametrizedLine (class in kornia.geometry.line)</a>
@@ -1629,10 +1662,10 @@
 </li>
         <li><a href="geometry.conversions.html#kornia.geometry.conversions.pol2cart">pol2cart() (in module kornia.geometry.conversions)</a>
 </li>
-        <li><a href="geometry.quaternion.html#kornia.geometry.quaternion.Quaternion.polar_angle">polar_angle (kornia.geometry.quaternion.Quaternion property)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="geometry.quaternion.html#kornia.geometry.quaternion.Quaternion.polar_angle">polar_angle (kornia.geometry.quaternion.Quaternion property)</a>
+</li>
         <li><a href="enhance.html#kornia.enhance.posterize">posterize() (in module kornia.enhance)</a>
 </li>
         <li><a href="geometry.camera.pinhole.html#kornia.geometry.camera.pinhole.PinholeCamera.project">project() (kornia.geometry.camera.pinhole.PinholeCamera method)</a>
@@ -2033,8 +2066,14 @@
 </li>
         <li><a href="feature.html#kornia.feature.set_laf_orientation">set_laf_orientation() (in module kornia.feature)</a>
 </li>
-        <li><a href="geometry.quaternion.html#kornia.geometry.quaternion.Quaternion.shape">shape (kornia.geometry.quaternion.Quaternion property)</a>
+        <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints.shape">shape (kornia.geometry.keypoints.Keypoints property)</a>
+
+        <ul>
+          <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints3D.shape">(kornia.geometry.keypoints.Keypoints3D property)</a>
 </li>
+          <li><a href="geometry.quaternion.html#kornia.geometry.quaternion.Quaternion.shape">(kornia.geometry.quaternion.Quaternion property)</a>
+</li>
+        </ul></li>
         <li><a href="enhance.html#kornia.enhance.sharpness">sharpness() (in module kornia.enhance)</a>
 </li>
         <li><a href="geometry.transform.html#kornia.geometry.transform.Shear">Shear (class in kornia.geometry.transform)</a>
@@ -2053,10 +2092,10 @@
 </li>
         <li><a href="augmentation.module.html#kornia.augmentation.SmallestMaxSize">SmallestMaxSize (class in kornia.augmentation)</a>
 </li>
-        <li><a href="geometry.liegroup.html#kornia.geometry.liegroup.So2">So2 (class in kornia.geometry.liegroup)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="geometry.liegroup.html#kornia.geometry.liegroup.So2">So2 (class in kornia.geometry.liegroup)</a>
+</li>
         <li><a href="geometry.liegroup.html#kornia.geometry.liegroup.Se2.so2">so2 (kornia.geometry.liegroup.Se2 property)</a>
 </li>
         <li><a href="geometry.liegroup.html#kornia.geometry.liegroup.So3">So3 (class in kornia.geometry.liegroup)</a>
@@ -2166,6 +2205,10 @@
         <ul>
           <li><a href="geometry.boxes.html#kornia.geometry.boxes.Boxes3D.to_tensor">(kornia.geometry.boxes.Boxes3D method)</a>
 </li>
+          <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints.to_tensor">(kornia.geometry.keypoints.Keypoints method)</a>
+</li>
+          <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints3D.to_tensor">(kornia.geometry.keypoints.Keypoints3D method)</a>
+</li>
         </ul></li>
         <li><a href="morphology.html#kornia.morphology.top_hat">top_hat() (in module kornia.morphology)</a>
 </li>
@@ -2187,14 +2230,14 @@
           <li><a href="geometry.liegroup.html#kornia.geometry.liegroup.Se3.trans">(kornia.geometry.liegroup.Se3 class method)</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="geometry.liegroup.html#kornia.geometry.liegroup.Se2.trans_x">trans_x() (kornia.geometry.liegroup.Se2 class method)</a>
 
         <ul>
           <li><a href="geometry.liegroup.html#kornia.geometry.liegroup.Se3.trans_x">(kornia.geometry.liegroup.Se3 class method)</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="geometry.liegroup.html#kornia.geometry.liegroup.Se2.trans_y">trans_y() (kornia.geometry.liegroup.Se2 class method)</a>
 
         <ul>
@@ -2215,6 +2258,18 @@
 
         <ul>
           <li><a href="geometry.boxes.html#kornia.geometry.boxes.Boxes3D.transform_boxes_">(kornia.geometry.boxes.Boxes3D method)</a>
+</li>
+        </ul></li>
+        <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints.transform_keypoints">transform_keypoints() (kornia.geometry.keypoints.Keypoints method)</a>
+
+        <ul>
+          <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints3D.transform_keypoints">(kornia.geometry.keypoints.Keypoints3D method)</a>
+</li>
+        </ul></li>
+        <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints.transform_keypoints_">transform_keypoints_() (kornia.geometry.keypoints.Keypoints method)</a>
+
+        <ul>
+          <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints3D.transform_keypoints_">(kornia.geometry.keypoints.Keypoints3D method)</a>
 </li>
         </ul></li>
         <li><a href="geometry.linalg.html#kornia.geometry.linalg.transform_points">transform_points() (in module kornia.geometry.linalg)</a>
@@ -2253,6 +2308,8 @@
         </ul></li>
         <li><a href="geometry.camera.pinhole.html#kornia.geometry.camera.pinhole.PinholeCamera.ty">ty (kornia.geometry.camera.pinhole.PinholeCamera property)</a>
 </li>
+        <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints.type">type() (kornia.geometry.keypoints.Keypoints method)</a>
+</li>
         <li><a href="geometry.camera.pinhole.html#kornia.geometry.camera.pinhole.PinholeCamera.tz">tz (kornia.geometry.camera.pinhole.PinholeCamera property)</a>
 </li>
     </ul></td>
@@ -2270,7 +2327,13 @@
         <li><a href="geometry.calibration.html#kornia.geometry.calibration.undistort_points">undistort_points() (in module kornia.geometry.calibration)</a>
 </li>
         <li><a href="geometry.boxes.html#kornia.geometry.boxes.Boxes.unpad">unpad() (kornia.geometry.boxes.Boxes method)</a>
+
+        <ul>
+          <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints.unpad">(kornia.geometry.keypoints.Keypoints method)</a>
 </li>
+          <li><a href="geometry.keypoints.html#kornia.geometry.keypoints.Keypoints3D.unpad">(kornia.geometry.keypoints.Keypoints3D method)</a>
+</li>
+        </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="geometry.camera.pinhole.html#kornia.geometry.camera.pinhole.PinholeCamera.unproject">unproject() (kornia.geometry.camera.pinhole.PinholeCamera method)</a>
