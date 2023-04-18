@@ -307,20 +307,19 @@
         </div>
         <article role="main">
           <h1>Source code for kornia.color.luv</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
+<span></span><span class="sd">&quot;&quot;&quot;The RGB to Luv color transformations were translated from scikit image&#39;s rgb2luv and luv2rgb.</span>
+
+<span class="sd">https://github.com/scikit-image/scikit-image/blob/a48bf6774718c64dade4548153ae16065b595ca9/skimage/color/colorconv.py</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
 
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
 
 <span class="kn">from</span> <span class="nn">.rgb</span> <span class="kn">import</span> <span class="n">linear_rgb_to_rgb</span><span class="p">,</span> <span class="n">rgb_to_linear_rgb</span>
 <span class="kn">from</span> <span class="nn">.xyz</span> <span class="kn">import</span> <span class="n">rgb_to_xyz</span><span class="p">,</span> <span class="n">xyz_to_rgb</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">The RGB to Luv color transformations were translated from scikit image&#39;s rgb2luv and luv2rgb</span>
-
-<span class="sd">https://github.com/scikit-image/scikit-image/blob/a48bf6774718c64dade4548153ae16065b595ca9/skimage/color/colorconv.py</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
 
 
 <div class="viewcode-block" id="rgb_to_luv"><a class="viewcode-back" href="../../../color.html#kornia.color.rgb_to_luv">[docs]</a><span class="k">def</span> <span class="nf">rgb_to_luv</span><span class="p">(</span><span class="n">image</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">eps</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-12</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
