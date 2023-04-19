@@ -410,7 +410,7 @@ Default: <code class="docutils literal notranslate"><span class="pre">'l1'</span
 
 <dl class="py function">
 <dt class="sig sig-object py" id="kornia.filters.box_blur">
-<span class="sig-prename descclassname"><span class="pre">kornia.filters.</span></span><span class="sig-name descname"><span class="pre">box_blur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">border_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'reflect'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/filters/blur.html#box_blur"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.filters.box_blur" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">kornia.filters.</span></span><span class="sig-name descname"><span class="pre">box_blur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">border_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'reflect'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/filters/blur.html#box_blur"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.filters.box_blur" title="Permalink to this definition">#</a></dt>
 <dd><p>Blur an image using the box filter.</p>
 <img alt="_images/box_blur.png" src="_images/box_blur.png" />
 <p>The function smooths an image using the kernel:</p>
@@ -432,8 +432,8 @@ Default: <code class="docutils literal notranslate"><span class="pre">'l1'</span
 <li><p><strong>border_type</strong> (<em>optional</em>) – the padding mode to be applied before convolving.
 The expected modes are: <code class="docutils literal notranslate"><span class="pre">'constant'</span></code>, <code class="docutils literal notranslate"><span class="pre">'reflect'</span></code>, <code class="docutils literal notranslate"><span class="pre">'replicate'</span></code> or <code class="docutils literal notranslate"><span class="pre">'circular'</span></code>.
 Default:  <code class="code docutils literal notranslate"><span class="pre">'reflect'</span></code></p></li>
-<li><p><strong>normalized</strong> (<em>optional</em>) – if True, L1 norm of the kernel is set to 1.
-Default:  <code class="code docutils literal notranslate"><span class="pre">True</span></code></p></li>
+<li><p><strong>separable</strong> (<em>optional</em>) – run as composition of two 1d-convolutions.
+Default:  <code class="code docutils literal notranslate"><span class="pre">False</span></code></p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -1719,7 +1719,7 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">2</s
 
 <dl class="py class">
 <dt class="sig sig-object py" id="kornia.filters.BoxBlur">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.filters.</span></span><span class="sig-name descname"><span class="pre">BoxBlur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">border_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'reflect'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/filters/blur.html#BoxBlur"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.filters.BoxBlur" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kornia.filters.</span></span><span class="sig-name descname"><span class="pre">BoxBlur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">border_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'reflect'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/kornia/filters/blur.html#BoxBlur"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kornia.filters.BoxBlur" title="Permalink to this definition">#</a></dt>
 <dd><p>Blur an image using the box filter.</p>
 <p>The function smooths an image using the kernel:</p>
 <div class="math-wrapper docutils container">
@@ -1739,8 +1739,8 @@ Default:  <code class="code docutils literal notranslate"><span class="pre">2</s
 <li><p><strong>border_type</strong> (<em>optional</em>) – the padding mode to be applied before convolving.
 The expected modes are: <code class="docutils literal notranslate"><span class="pre">'constant'</span></code>, <code class="docutils literal notranslate"><span class="pre">'reflect'</span></code>,
 <code class="docutils literal notranslate"><span class="pre">'replicate'</span></code> or <code class="docutils literal notranslate"><span class="pre">'circular'</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">'reflect'</span></code>.</p></li>
-<li><p><strong>normalized</strong> (<em>optional</em>) – if True, L1 norm of the kernel is set to 1.
-Default:  <code class="code docutils literal notranslate"><span class="pre">True</span></code></p></li>
+<li><p><strong>separable</strong> (<em>optional</em>) – run as composition of two 1d-convolutions.
+Default:  <code class="code docutils literal notranslate"><span class="pre">False</span></code></p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

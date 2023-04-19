@@ -569,10 +569,34 @@
     <span class="k">return</span> <span class="n">filter_1d</span>
 
 
+<span class="k">def</span> <span class="nf">get_box_kernel1d</span><span class="p">(</span><span class="n">kernel_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">Device</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Utility function that returns a 1-D box filter.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        kernel_size: the size of the kernel.</span>
+<span class="sd">        device: the desired device of returned tensor.</span>
+<span class="sd">        dtype: the desired data type of returned tensor.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A tensor with shape :math:`(1, \text{kernel\_size})`, filled with the value</span>
+<span class="sd">        :math:`\frac{1}{\text{kernel\_size}}`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">scale</span> <span class="o">=</span> <span class="n">tensor</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">scale</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">)</span>
+
+
 <span class="k">def</span> <span class="nf">get_box_kernel2d</span><span class="p">(</span>
     <span class="n">kernel_size</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">Device</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Utility function that returns a box filter.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Utility function that returns a 2-D box filter.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        kernel_size: the size of the kernel.</span>
+<span class="sd">        device: the desired device of returned tensor.</span>
+<span class="sd">        dtype: the desired data type of returned tensor.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A tensor with shape :math:`(1, \text{kernel\_size}[0], \text{kernel\_size}[1])`,</span>
+<span class="sd">        filled with the value :math:`\frac{1}{\text{kernel\_size}[0] \times \text{kernel\_size}[1]}`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ky</span><span class="p">,</span> <span class="n">kx</span> <span class="o">=</span> <span class="n">_unpack_2d_ks</span><span class="p">(</span><span class="n">kernel_size</span><span class="p">)</span>
     <span class="n">scale</span> <span class="o">=</span> <span class="n">tensor</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">kx</span> <span class="o">*</span> <span class="n">ky</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">scale</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ky</span><span class="p">,</span> <span class="n">kx</span><span class="p">)</span>
