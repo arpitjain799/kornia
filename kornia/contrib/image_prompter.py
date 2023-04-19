@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import torch
 
@@ -13,6 +13,13 @@ from kornia.core.check import KORNIA_CHECK, KORNIA_CHECK_IS_TENSOR, KORNIA_CHECK
 from kornia.enhance import normalize
 from kornia.geometry.boxes import Boxes
 from kornia.geometry.keypoints import Keypoints
+
+if TYPE_CHECKING:
+    import numpy.typing as npt
+
+    Image_T = Tensor | list[list[tuple[int, int, int] | tuple[float, float, float]]] | npt.DTypeLike
+else:
+    Image_T = Tensor | list[list[tuple[int, int, int] | tuple[float, float, float]]]
 
 
 class ImagePrompter:
@@ -107,7 +114,7 @@ class ImagePrompter:
 
         return x
 
-    def _parse_image(self, image: Any) -> Tensor:
+    def _parse_image(self, image: Image_T) -> Tensor:
         if isinstance(image, Tensor):
             return image
 
@@ -123,32 +130,35 @@ class ImagePrompter:
         return _image
 
     @torch.no_grad()
-    def set_image(self, image: Tensor, mean: Tensor | None = None, std: Tensor | None = None) -> None:
+    def set_image(self, image: Image_T, mean: Tensor | None = None, std: Tensor | None = None) -> None:
         """Set the embeddings from the given image with `image_decoder` of the model.
 
         Prepare the given image with the selected transforms and the preprocess method.
 
         Args:
-            image: RGB image. Normally images with range of [0-1], the model preprocess normalize the
+            image: RGB image. Images with range of [0-1], the model preprocess normalize the
                    pixel values with the mean and std defined in its initialization. Expected to be into a float32
-                   dtype. Shape :math:`(3, H, W)`.
+                   dtype. Shape for tensor :math:`(3, H, W)`, for arrays and raw list can also be in shape
+                   :math:`(H, W, 3)`.
+            mean: Mean for each channel.
+            std: Standard deviations for each channel.
         """
-        image = self._parse_image(image)
-        KORNIA_CHECK_SHAPE(image, ['3', 'H', 'W'])
+        _img = self._parse_image(image)
+        KORNIA_CHECK_SHAPE(_img, ['3', 'H', 'W'])
 
         self.reset_image()
 
-        self._original_image_size = (image.shape[-2], image.shape[-1])
+        self._original_image_size = (_img.shape[-2], _img.shape[-1])
 
-        image = self.transforms(image, data_keys=['input'])
+        _img = self.transforms(_img, data_keys=['input'])
         self._tfs_params = self.transforms._params
-        self._input_image_size = (image.shape[-2], image.shape[-1])
+        self._input_image_size = (_img.shape[-2], _img.shape[-1])
 
-        image = self.preprocess_image(image, mean, std)
+        _img = self.preprocess_image(_img, mean, std)
 
-        self._input_encoder_size = (image.shape[-2], image.shape[-1])
+        self._input_encoder_size = (_img.shape[-2], _img.shape[-1])
 
-        self.image_embeddings = self.model.image_encoder(image)
+        self.image_embeddings = self.model.image_encoder(_img)
         self.is_image_set = True
 
     def _valid_keypoints(self, keypoints: Keypoints | Tensor, labels: Tensor) -> Keypoints:
