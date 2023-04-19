@@ -195,8 +195,8 @@
 <li class="toctree-l1"><a class="reference internal" href="applications/image_matching.html">Image Matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="applications/image_stitching.html">Image Stitching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="applications/image_registration.html">Image Registration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="applications/semantic_segmentation.html">Semantic segmentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="applications/image_denoising.html">Image Denoising</a></li>
+<li class="toctree-l1"><a class="reference internal" href="applications/semantic_segmentation.html">Semantic segmentation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">KORNIA MODELS</span></p>
 <ul>
@@ -209,6 +209,7 @@
 <li class="toctree-l1"><a class="reference internal" href="models/affnet.html">Affnet (detection)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models/sold2.html">SOLD2 (Line detection and matching)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models/dexined.html">Dexined (edge detection)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models/segment_anything.html">Segment Anything (SAM)</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API REFERENCE</span></p>
 <ul class="current">
@@ -353,7 +354,7 @@ Contact us or sponsor the project for more support (mac, win, rust, c++, video a
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Path to a valid image file.</p></li>
 <li><p><strong>desired_type</strong> (<a class="reference internal" href="#kornia.io.ImageLoadType" title="kornia.io.io.ImageLoadType"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImageLoadType</span></code></a>) – the desired image type, defined by color space and dtype.</p></li>
-<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <em>optional</em>) – the device where you want to get your image placed.
+<li><p><strong>device</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://pytorch.org/docs/stable/tensor_attributes.html#torch.device" title="(in PyTorch v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">device</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>], <em>optional</em>) – the device where you want to get your image placed.
 Default:  <code class="code docutils literal notranslate"><span class="pre">'cpu'</span></code></p></li>
 </ul>
 </dd>
