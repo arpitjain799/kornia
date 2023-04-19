@@ -1,5 +1,6 @@
 import sys
 
+import numpy as np
 import pytest
 import torch
 
@@ -104,3 +105,59 @@ class TestImagePrompter(BaseTester):
 
         self.assert_close(expected.logits, actual.logits)
         self.assert_close(expected.scores, actual.scores)
+
+    def test_set_image(self, device, dtype):
+        inpt = torch.rand(3, 25, 13, device=device, dtype=dtype)
+        prompter = ImagePrompter(SamConfig('vit_b'), device, dtype)
+
+        prompter.set_image(inpt)
+        assert prompter.is_image_set
+
+        prompter.reset_image()
+        assert not prompter.is_image_set
+
+    @pytest.mark.parametrize('image_shape', [(3, 25, 13), (25, 13, 3)])
+    def test_set_image_numpy(self, device, dtype, image_shape):
+        if dtype == torch.float32:
+            npdtype = np.float32
+        elif dtype == torch.float64:
+            npdtype = np.float64
+        elif dtype == torch.float16:
+            npdtype = np.float16
+        else:
+            raise NotImplementedError('unexpected dtype')
+
+        inpt = np.random.random(image_shape).astype(npdtype)
+
+        prompter = ImagePrompter(SamConfig('vit_b'), device, dtype)
+
+        prompter.set_image(inpt)
+        assert prompter.is_image_set
+        assert prompter.image_embeddings.shape == (1, 256, 64, 64)
+        assert prompter.image_embeddings.dtype == dtype
+
+        prompter.reset_image()
+        assert not prompter.is_image_set
+
+    @pytest.mark.parametrize('image_shape', [(3, 25, 13), (25, 13, 3)])
+    def test_set_image_raw_list(self, device, dtype, image_shape):
+        if dtype == torch.float32:
+            npdtype = np.float32
+        elif dtype == torch.float64:
+            npdtype = np.float64
+        elif dtype == torch.float16:
+            npdtype = np.float16
+        else:
+            raise NotImplementedError('unexpected dtype')
+
+        inpt = np.random.random(image_shape).astype(npdtype).tolist()
+
+        prompter = ImagePrompter(SamConfig('vit_b'), device, dtype)
+
+        prompter.set_image(inpt)
+        assert prompter.is_image_set
+        assert prompter.image_embeddings.shape == (1, 256, 64, 64)
+        assert prompter.image_embeddings.dtype == dtype
+
+        prompter.reset_image()
+        assert not prompter.is_image_set

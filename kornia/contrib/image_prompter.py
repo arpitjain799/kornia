@@ -107,6 +107,21 @@ class ImagePrompter:
 
         return x
 
+    def _parse_image(self, image: Any) -> Tensor:
+        if isinstance(image, Tensor):
+            return image
+
+        _image = torch.as_tensor(image, device=self.device, dtype=self.dtype)
+
+        KORNIA_CHECK(
+            _image.shape[0] == 3 or _image.shape[-1] == 3, "Should be a RGB image. With shape (3, H, W) or (H, W, 3)"
+        )
+
+        if _image.shape[-1] == 3:
+            _image = _image.permute(2, 0, 1)
+
+        return _image
+
     @torch.no_grad()
     def set_image(self, image: Tensor, mean: Tensor | None = None, std: Tensor | None = None) -> None:
         """Set the embeddings from the given image with `image_decoder` of the model.
@@ -118,6 +133,7 @@ class ImagePrompter:
                    pixel values with the mean and std defined in its initialization. Expected to be into a float32
                    dtype. Shape :math:`(3, H, W)`.
         """
+        image = self._parse_image(image)
         KORNIA_CHECK_SHAPE(image, ['3', 'H', 'W'])
 
         self.reset_image()
