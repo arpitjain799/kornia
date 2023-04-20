@@ -424,8 +424,8 @@ to query the image masks from the SAM model.</p>
 
 <span class="c1"># Runs the prediction with all prompts</span>
 <span class="n">prediction</span> <span class="o">=</span> <span class="n">prompter</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
-    <span class="n">point_coords</span><span class="o">=</span><span class="n">keypoints</span><span class="p">,</span>
-    <span class="n">point_labels</span><span class="o">=</span><span class="n">keypoints_labels</span><span class="p">,</span>
+    <span class="n">keypoints</span><span class="o">=</span><span class="n">keypoints</span><span class="p">,</span>
+    <span class="n">keypoints_labels</span><span class="o">=</span><span class="n">keypoints_labels</span><span class="p">,</span>
     <span class="n">boxes</span><span class="o">=</span><span class="n">boxes</span><span class="p">,</span>
     <span class="n">multimask_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
@@ -433,8 +433,8 @@ to query the image masks from the SAM model.</p>
 <span class="c1">#----------------------------------------------</span>
 <span class="c1"># or run the prediction with just the keypoints</span>
 <span class="n">prediction</span> <span class="o">=</span> <span class="n">prompter</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
-    <span class="n">point_coords</span><span class="o">=</span><span class="n">keypoints</span><span class="p">,</span>
-    <span class="n">point_labels</span><span class="o">=</span><span class="n">keypoints_labels</span><span class="p">,</span>
+    <span class="n">keypoints</span><span class="o">=</span><span class="n">keypoints</span><span class="p">,</span>
+    <span class="n">keypoints_labels</span><span class="o">=</span><span class="n">keypoints_labels</span><span class="p">,</span>
     <span class="n">multimask_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 
